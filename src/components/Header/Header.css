@@ -1,0 +1,10 @@
+.header__container {
+  max-width: 100%;
+  min-height: 74px;
+  background-color: #dddee3;
+}
+
+.header__button {
+  background: #3456f3;
+  border-radius: 3px;
+}
