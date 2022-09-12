@@ -1,0 +1,38 @@
+.footer {
+  min-height: 106px;
+  padding: 65px 70px 0px 70px;
+  font-weight: 400;
+  font-size: 13px;
+  line-height: 16px;
+  text-align: center;
+  color: #A0A0A0;
+  font-family: "Inter";
+  font-style: normal;
+  font-weight: 400;
+}
+
+.footer__info {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  color: black;
+  margin-top: 30px;
+}
+
+.footer__link {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.footer__git {
+  margin-left: 20px;
+}
+
+@media (max-width: 780px) {
+  .footer {
+    padding: 34px 70px 0px 70px;
+
+}
+
+}

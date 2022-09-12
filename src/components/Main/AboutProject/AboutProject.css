@@ -1,0 +1,155 @@
+.aboutProject {
+  display: flex;
+  flex-direction: column;
+  padding: 110px 70px 110px 70px;
+}
+
+.aboutProject__more {
+  border-top: solid 1px black;
+  display: grid;
+  grid-template-columns: minmax(200px, 500px) minmax(200px, 500px);
+  grid-template-rows: 1fr 1fr;
+  gap: 0px 91px;
+  margin-bottom: 58px;
+}
+
+.aboutProject__title {
+  font-weight: 400;
+  font-size: 22px;
+  line-height: 27px;
+  margin: 0 0 23px 0;
+}
+
+.aboutProject__sub-title {
+  font-weight: 400;
+  font-size: 20px;
+  line-height: 24px;
+  margin: 70px 0 12px 0;
+}
+
+.aboutProject__info {
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 20px;
+}
+
+.aboutProject__calendar {
+  display: grid;
+  grid-template-columns: 1fr 4fr;
+  grid-template-rows: 36px 36px;
+  text-align: center;
+}
+
+.aboutProject__calendar-week {
+  background-color: #f2f2f2;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.aboutProject__calendar-fronnt-beck {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.aboutProject__calendar-week_blue {
+  background-color: #3456f3;
+  color: #ffffff;
+}
+
+.aboutProject__calendar-text {
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 17px;
+  text-align: center;
+  color: #000000;
+  margin: 0;
+}
+
+@media (max-width: 768px) {
+  .aboutProject {
+    padding: 90px 40px 0px 40px;
+  }
+
+  .aboutProject__sub-title {
+    margin: 70px 0 6px 0;
+  }
+
+  .aboutProject__more {
+    gap: 0px 32px;
+    margin-bottom: 39px;
+  }
+
+  .aboutProject__info {
+    font-size: 12px;
+    line-height: 18px;
+  }
+}
+
+@media (max-width: 490px) {
+  .aboutProject {
+    padding: 69px 17px 0px 17px;
+  }
+
+  .aboutProject__title {
+    font-size: 18px;
+    line-height: 22px;
+    margin: 0 0 29px 0;
+  }
+
+  .aboutProject__sub-title {
+    font-size: 18px;
+    line-height: 22px;
+    margin: 62px 0 3px 0;
+  }
+
+  .aboutProject__sub-title :first-child {
+    color: #3456f3;
+  }
+
+  .aboutProject__more {
+    grid-template-columns: 1fr;
+    grid-template-areas:
+      "a"
+      "b"
+      "c"
+      "d";
+      margin-bottom: 64px;
+  }
+
+  .aboutProject__sub-title_a {
+    grid-area: a;
+  }
+
+  .aboutProject__sub-title_c {
+    grid-area: c;
+  }
+
+  .aboutProject__sub-title_mobile {
+    margin-top: 8px;
+  }
+
+  .aboutProject__info_b {
+    grid-area: b;
+  }
+
+  .aboutProject__info_d {
+    grid-area: d;
+  }
+
+  .aboutProject__info {
+    font-weight: 400;
+    font-size: 11px;
+    line-height: 16px;
+  }
+
+  .aboutProject__calendar {
+    grid-template-columns: 1fr 2fr;
+  }
+
+  .aboutProject__calendar-text {
+    font-size: 11px;
+    line-height: 13px;
+  }
+}
