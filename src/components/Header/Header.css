@@ -1,12 +1,59 @@
-.header__container {
-  max-width: 100%;
-  min-height: 74px;
+.header {
   background-color: #dddee3;
-  display: flex;
-  flex-direction: column;
 }
 
-.header__button {
+.header_white {
+  background-color: #fafafa;
+}
+
+.header__container {
+  max-width: 1280px;
+  margin-right: auto;
+  margin-left: auto;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  padding: 18px 70px 18px 70px;
+  text-align: center;
+}
+
+.header__container_auth {
+  max-width: 400px;
+  padding: 70px 0px 0px 0px;
+}
+
+.header__container-profile {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  width: 100%;
+  padding-left: 44px;
+}
+
+.header__container-profile-link {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.header__link {
+  font-family: "Inter";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 13px;
+  line-height: 18px;
+  text-decoration: none;
+  color: #000000;
+  margin-right: 17px;
+  margin-top: auto;
+  margin-bottom: auto;
+}
+
+.header__link:first-child {
+  font-weight: 500;
+}
+
+.header__signin {
   background: #3456f3;
   border-radius: 3px;
   border: none;
@@ -18,6 +65,12 @@
   color: #ffffff;
   height: 32px;
   width: 76px;
+  cursor: pointer;
+  text-decoration: none;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .header__logo {
@@ -25,12 +78,11 @@
   max-height: 38px;
 }
 
+.header__logo-link {
+  max-height: 38px;
+}
+
 .header__menu-logo {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  padding: 18px 70px 18px 70px;
-  text-align: center;
 }
 
 .header__login {
@@ -38,7 +90,7 @@
   align-items: center;
 }
 
-.header__sungup {
+.header__signup {
   font-family: "Inter";
   font-style: normal;
   font-weight: 500;
@@ -46,6 +98,33 @@
   line-height: 16px;
   color: #000000;
   margin-right: 30px;
+  background: #dddee3;
+  border: none;
+  cursor: pointer;
+  text-decoration: none;
+}
+
+.header__buttom-akkaunt {
+  box-sizing: border-box;
+  border: 2px solid rgba(170, 170, 170, 0.2);
+  border-radius: 50px;
+  background: #fafafa;
+  display: flex;
+  align-items: center;
+  padding-left: 12px;
+  min-height: 32px;
+  margin-top: auto;
+  margin-bottom: auto;
+}
+
+.header__buttom-akkaunt-title {
+  font-family: "Inter";
+  font-style: normal;
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 16px;
+  margin-left: 8px;
+  margin-right: 5px;
 }
 
 @media (max-width: 768px) {

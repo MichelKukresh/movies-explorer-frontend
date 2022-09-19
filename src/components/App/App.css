@@ -5,13 +5,13 @@
 
 .app__container {
   /* min-width: 320px; */
-  max-width: 1280px;
+  /* max-width: 1280px; */
   min-height: 100vh;
   width: 100%;
   display: flex;
   flex-direction: column;
   margin: 0 auto;
-  padding: 0px 0 60px;
+  padding: 0px 0 20px;
 }
 
 /* @media (max-width: 650px) {

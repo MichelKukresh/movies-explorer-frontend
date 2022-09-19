@@ -1,0 +1,160 @@
+.login {
+  font-family: "Inter";
+  font-style: normal;
+}
+
+.login__wrapper-logo {
+  max-width: 400px;
+  margin-left: auto;
+  margin-right: auto;
+  padding-top: 70px;
+}
+
+.login__logo {
+  align-self: flex-start;
+}
+
+.login__hello {
+  font-weight: 500;
+  font-size: 24px;
+  line-height: 29px;
+  margin-top: 37px;
+}
+
+.login__form-container {
+  display: flex;
+  flex-direction: column;
+  max-width: 396px;
+  align-items: flex-start;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 40px;
+}
+
+.login__span-input {
+  font-weight: 400;
+  font-size: 10px;
+  line-height: 12px;
+  color: #a0a0a0;
+  margin-bottom: 4px;
+}
+
+.login__span-input_validation {
+  color: #ee3465;
+  margin-top: 8px;
+}
+
+.login__submit-button {
+  background: #3456f3;
+  height: 45px;
+  width: 100%;
+  border-radius: 3px;
+  border: none;
+  font-family: "Inter";
+  font-style: normal;
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 17px;
+  text-align: center;
+  color: #ffffff;
+  margin-top: 201px;
+  margin-bottom: 16px;
+}
+
+.login__input-type {
+  border: none;
+  border-bottom: solid 1px #e8e8e8;
+  background: #fafafa;
+  padding-bottom: 8px;
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 17px;
+  width: 100%;
+}
+
+.login__is-login {
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 17px;
+  /* identical to box height */
+
+  text-align: center;
+
+  color: #a0a0a0;
+}
+
+.login__in {
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 17px;
+  /* identical to box height */
+
+  text-align: center;
+
+  color: #3456f3;
+  border: none;
+  background: #fafafa;
+}
+
+.login__wrapper-is-login {
+  display: flex;
+  justify-content: space-between;
+  max-width: 290px;
+  margin: 0 auto 0 auto;
+}
+
+@media (max-width: 780px) {
+  .login__wrapper-logo {
+    max-width: 395px;
+    padding-top: 232px;
+  }
+
+  .login__input-type {
+
+    padding-bottom: 10px;
+
+
+}
+}
+
+@media (max-width: 500px) {
+
+  .login__wrapper-logo {
+    width: 100%;
+    padding-top: 56px;
+    text-align: center;
+}
+
+.login__hello {
+  margin-top: 47px;
+}
+
+.login__form-container {
+  margin-top: 81px;
+}
+
+.login__form-container {
+  max-width: 260px;
+}
+
+.login__submit-button {
+  margin-top: 215px;
+  margin-bottom: 14px;
+
+}
+
+.login__is-login {
+  font-size: 12px;
+  line-height: 15px;
+}
+
+.login__in {
+  font-size: 12px;
+  line-height: 15px;
+}
+
+.login__wrapper-is-login {
+  max-width: 254px;
+}
+
+}

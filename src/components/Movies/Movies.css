@@ -1,0 +1,21 @@
+.movies {
+  font-family: "Inter";
+  font-style: normal;
+}
+
+.movies__container {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  max-width: 1280px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.movies__container-search {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  width: 100%;
+
+}

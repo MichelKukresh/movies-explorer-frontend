@@ -4,7 +4,7 @@ import arrow from "../../../images/text__COLOR_font-main.png";
 
 function Portfolio() {
   return (
-    <div className="portfolio">
+    <section className="portfolio">
       <h2 className="portfolio__title">Студент</h2>
       <div className="portfolio__text-foto">
         <div >
@@ -24,12 +24,12 @@ function Portfolio() {
       </div>
       <div>
         <ul className="portfolio__list-link">
-          <li className="portfolio__text-link"><a className="portfolio__link" href="URL">Статичный сайт</a><img alt="стрелка" src={arrow}/></li>
-          <li className="portfolio__text-link portfolio__text-link_border"><a className="portfolio__link" href="URL">Адаптивный сайт</a><img alt="стрелка" src={arrow}/></li>
-          <li className="portfolio__text-link"><a className="portfolio__link" href="URL">Одностраничное приложение</a><img alt="стрелка" src={arrow}/></li>
+          <li className="portfolio__text-link"><a target="blank" className="portfolio__link" href="https://michelkukresh.github.io/russian-travel/index.html">Статичный сайт</a><img alt="стрелка" src={arrow}/></li>
+          <li className="portfolio__text-link portfolio__text-link_border"><a target="blank" className="portfolio__link" href="https://michelkukresh.github.io/mesto/index.html">Адаптивный сайт</a><img alt="стрелка" src={arrow}/></li>
+          <li className="portfolio__text-link"><a target="blank" className="portfolio__link" href="https://kukreshma.students.nomoredomains.sbs">Одностраничное приложение</a><img alt="стрелка" src={arrow}/></li>
         </ul>
       </div>
-    </div>
+    </section>
   );
 }
 
