@@ -1,3 +1,32 @@
+.urgerMenu {
+  border: none;
+  display: none;
+  background-color: #fafafa;
+}
+
 .urgerMenu__wrapper {
   height: 38px;
+}
+
+@media (max-width: 800px) {
+  .urgerMenu {
+    display: block;
+  }
+
+  .urgerMenu__wrapper {
+    display: block;
+  }
+  .urgerMenu__wrapper_l {
+    display: none;
+  }
+}
+
+@media (max-width: 500px) {
+  .urgerMenu__wrapper_l {
+    display: block;
+  }
+
+  .urgerMenu__wrapper_Xl {
+    display: none;
+  }
 }

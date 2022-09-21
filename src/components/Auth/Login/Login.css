@@ -76,10 +76,7 @@
   font-weight: 400;
   font-size: 14px;
   line-height: 17px;
-  /* identical to box height */
-
   text-align: center;
-
   color: #a0a0a0;
 }
 
@@ -87,7 +84,6 @@
   font-weight: 400;
   font-size: 14px;
   line-height: 17px;
-  /* identical to box height */
 
   text-align: center;
 
@@ -110,51 +106,45 @@
   }
 
   .login__input-type {
-
     padding-bottom: 10px;
-
-
-}
+  }
 }
 
 @media (max-width: 500px) {
-
   .login__wrapper-logo {
     width: 100%;
     padding-top: 56px;
     text-align: center;
-}
+  }
 
-.login__hello {
-  margin-top: 47px;
-}
+  .login__hello {
+    margin-top: 47px;
+  }
 
-.login__form-container {
-  margin-top: 81px;
-}
+  .login__form-container {
+    margin-top: 81px;
+  }
 
-.login__form-container {
-  max-width: 260px;
-}
+  .login__form-container {
+    max-width: 260px;
+  }
 
-.login__submit-button {
-  margin-top: 215px;
-  margin-bottom: 14px;
+  .login__submit-button {
+    margin-top: 215px;
+    margin-bottom: 14px;
+  }
 
-}
+  .login__is-login {
+    font-size: 12px;
+    line-height: 15px;
+  }
 
-.login__is-login {
-  font-size: 12px;
-  line-height: 15px;
-}
+  .login__in {
+    font-size: 12px;
+    line-height: 15px;
+  }
 
-.login__in {
-  font-size: 12px;
-  line-height: 15px;
-}
-
-.login__wrapper-is-login {
-  max-width: 254px;
-}
-
+  .login__wrapper-is-login {
+    max-width: 254px;
+  }
 }

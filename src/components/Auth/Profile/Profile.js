@@ -6,7 +6,6 @@ function Profile() {
       <div className="profile__wrapper-logo">
       <h2 className="profile__hello">Привет, Виталий!</h2>
       </div>
-
       <form className="profile__form-container">
         <span className="profile__span-input">Василий</span>
         <input type="text" className="profile__input-type" placeholder="Имя"></input>
@@ -19,7 +18,6 @@ function Profile() {
       <div className="profile__wrapper-is-profile">
           <button className="profile__in">Выйти из аккаунта</button>
         </div>
-
     </div>
 
   )

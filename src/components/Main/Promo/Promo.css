@@ -1,17 +1,13 @@
 .promo {
-
-
   background-color: #dddee3;
 }
 
 .promo__wrapper {
   max-width: 1280px;
   box-sizing: border-box;
-
   padding: 75px 70px 25px 70px;
   display: flex;
   justify-content: space-between;
-
   margin-left: auto;
   margin-right: auto;
 }
@@ -66,7 +62,6 @@
 
 @media (max-width: 768px) {
   .promo__wrapper {
-
     flex-direction: column-reverse;
     align-items: center;
   }
@@ -122,5 +117,5 @@
 
   .promo__span {
     margin-bottom: 83px;
-}
+  }
 }

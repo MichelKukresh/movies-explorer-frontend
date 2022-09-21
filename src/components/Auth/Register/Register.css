@@ -110,51 +110,45 @@
   }
 
   .register__input-type {
-
     padding-bottom: 10px;
-
-
-}
+  }
 }
 
 @media (max-width: 500px) {
-
   .register__wrapper-logo {
     width: 100%;
     padding-top: 56px;
     text-align: center;
-}
+  }
 
-.register__hello {
-  margin-top: 47px;
-}
+  .register__hello {
+    margin-top: 47px;
+  }
 
-.register__form-container {
-  margin-top: 81px;
-}
+  .register__form-container {
+    margin-top: 81px;
+  }
 
-.register__form-container {
-  max-width: 260px;
-}
+  .register__form-container {
+    max-width: 260px;
+  }
 
-.register__submit-button {
-  margin-top: 215px;
-  margin-bottom: 14px;
+  .register__submit-button {
+    margin-top: 215px;
+    margin-bottom: 14px;
+  }
 
-}
+  .register__is-register {
+    font-size: 12px;
+    line-height: 15px;
+  }
 
-.register__is-register {
-  font-size: 12px;
-  line-height: 15px;
-}
+  .register__in {
+    font-size: 12px;
+    line-height: 15px;
+  }
 
-.register__in {
-  font-size: 12px;
-  line-height: 15px;
-}
-
-.register__wrapper-is-register {
-  max-width: 195px;
-}
-
+  .register__wrapper-is-register {
+    max-width: 195px;
+  }
 }

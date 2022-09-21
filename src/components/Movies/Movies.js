@@ -1,25 +1,18 @@
 import "./Movies.css";
-import tumb from "../../images/smalltumb.svg";
-import tumbOff from "../../images/smalltumboff.svg";
-import searchicon from "../../images/searchicon.svg";
-import find from "../../images/find.svg";
+import MoviesCardList from "./MoviesCardList/MoviesCardList";
+import Preloader from "./Preloader/Preloader";
+import SearchForm from "./SearchForm/SearchForm";
 
 function Movies() {
-  return(
+  return (
     <section className="movies">
       <div className="movies__container">
-      <div className="movies__container-search">
-        <img src={searchicon} alt="иконка поиска"/>
-        <p>Фильм</p>
-        <button><img src={find} alt="кнопка поиска"/></button>
-
-
-      </div>
-      <button><img src={tumb} alt="включено"/></button>
-      <button><img src={tumbOff} alt="выключено"/></button>
+        <SearchForm></SearchForm>
+        <MoviesCardList></MoviesCardList>
+        <Preloader></Preloader>
       </div>
     </section>
-  )
+  );
 }
 
 export default Movies;

@@ -7,9 +7,11 @@ function Portfolio() {
     <section className="portfolio">
       <h2 className="portfolio__title">Студент</h2>
       <div className="portfolio__text-foto">
-        <div >
+        <div>
           <h2 className="portfolio__name">Михаил</h2>
-          <p className="portfolio__professional">Фронтенд-разработчик, 35 лет</p>
+          <p className="portfolio__professional">
+            Фронтенд-разработчик, 35 лет
+          </p>
           <p className="portfolio__about">
             Я родился и живу в Саратове, закончил факультет экономики СГУ. У
             меня есть жена и дочь. Я люблю слушать музыку, а ещё увлекаюсь
@@ -24,9 +26,36 @@ function Portfolio() {
       </div>
       <div>
         <ul className="portfolio__list-link">
-          <li className="portfolio__text-link"><a target="blank" className="portfolio__link" href="https://michelkukresh.github.io/russian-travel/index.html">Статичный сайт</a><img alt="стрелка" src={arrow}/></li>
-          <li className="portfolio__text-link portfolio__text-link_border"><a target="blank" className="portfolio__link" href="https://michelkukresh.github.io/mesto/index.html">Адаптивный сайт</a><img alt="стрелка" src={arrow}/></li>
-          <li className="portfolio__text-link"><a target="blank" className="portfolio__link" href="https://kukreshma.students.nomoredomains.sbs">Одностраничное приложение</a><img alt="стрелка" src={arrow}/></li>
+          <li className="portfolio__text-link">
+            <a
+              target="blank"
+              className="portfolio__link"
+              href="https://michelkukresh.github.io/russian-travel/index.html"
+            >
+              Статичный сайт
+            </a>
+            <img alt="стрелка" src={arrow} />
+          </li>
+          <li className="portfolio__text-link portfolio__text-link_border">
+            <a
+              target="blank"
+              className="portfolio__link"
+              href="https://michelkukresh.github.io/mesto/index.html"
+            >
+              Адаптивный сайт
+            </a>
+            <img alt="стрелка" src={arrow} />
+          </li>
+          <li className="portfolio__text-link">
+            <a
+              target="blank"
+              className="portfolio__link"
+              href="https://kukreshma.students.nomoredomains.sbs"
+            >
+              Одностраничное приложение
+            </a>
+            <img alt="стрелка" src={arrow} />
+          </li>
         </ul>
       </div>
     </section>

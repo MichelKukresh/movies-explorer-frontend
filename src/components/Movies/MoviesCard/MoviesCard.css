@@ -1,0 +1,57 @@
+.moviesCard {
+  font-family: "Inter";
+  font-style: normal;
+  background: #ffffff;
+  box-shadow: 0px 4px 30px rgba(0, 0, 0, 0.08);
+  height: 271px;
+}
+
+.moviesCard__container-text-button {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.moviesCard__container-text {
+  margin-left: 13px;
+}
+
+.moviesCard__img {
+  width: 100%;
+}
+
+.moviesCard__name {
+  font-weight: 500;
+  font-size: 15px;
+  line-height: 18px;
+  margin-bottom: 0px;
+}
+
+.moviesCard__time {
+  font-weight: 400;
+  font-size: 11px;
+  line-height: 13px;
+  color: #a0a0a0;
+  margin-top: 10px;
+  margin-bottom: 12px;
+}
+
+.moviesCard__button {
+  border: none;
+  background-color: #ffffff;
+  margin-right: 8px;
+}
+
+@media (max-width: 800px) {
+  .moviesCard {
+    height: 257px;
+  }
+}
+
+@media (max-width: 500px) {
+  .moviesCard {
+  height: 233px;
+}
+}
+
+
