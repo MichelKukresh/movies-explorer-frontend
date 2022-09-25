@@ -16,13 +16,16 @@ import "./App.css";
 function App() {
   const navigate = useNavigate();
   const [isEditNavigationMenuOpen, setEditNavigationMenuOpen] = useState(false); // Попап регистрации
+  const [typeEditUiMenu, setEditUiMenu] = useState("");
 
   useEffect(() => {
     tokenCheck();
+    setEditUiMenu("/main");
+
   }, []);
 
   const tokenCheck = () => {
-    navigate("/sign");
+    navigate("/movies-explorer-frontend");
   };
 
   function inMovies() {
@@ -39,12 +42,17 @@ function App() {
     navigate("/profile");
   }
 
+  function inMain() {
+    navigate("/movies-explorer-frontend");
+    setEditNavigationMenuOpen(false);
+  }
+
   return (
     <div className="app">
       <div className="app__container">
         <Routes>
           <Route
-            path="/sign"
+            path="/movies-explorer-frontend"
             element={
               <div>
                 <Header type="landing" />
@@ -78,10 +86,12 @@ function App() {
                 <Header
                   setOpen={setEditNavigationMenuOpen}
                   type="profile"
-                ></Header>
-                <Profile
                   inMovies={inMovies}
                   inSavedMovies={inSavedMovies}
+                  setEditUiMenu={setEditUiMenu}
+                  typeEditUiMenu={typeEditUiMenu}
+                ></Header>
+                <Profile
                 ></Profile>
               </>
             }
@@ -93,6 +103,10 @@ function App() {
                 <Header
                   setOpen={setEditNavigationMenuOpen}
                   type="profile"
+                  inMovies={inMovies}
+                  inSavedMovies={inSavedMovies}
+                  setEditUiMenu={setEditUiMenu}
+                  typeEditUiMenu={typeEditUiMenu}
                 ></Header>
                 <Movies></Movies>
                 <Footer></Footer>
@@ -106,6 +120,10 @@ function App() {
                 <Header
                   type="profile"
                   setOpen={setEditNavigationMenuOpen}
+                  inMovies={inMovies}
+                  inSavedMovies={inSavedMovies}
+                  setEditUiMenu={setEditUiMenu}
+                  typeEditUiMenu={typeEditUiMenu}
                 ></Header>
                 <SavedMovies></SavedMovies>
               </>
@@ -117,6 +135,9 @@ function App() {
           inMovies={inMovies}
           inSavedMovies={inSavedMovies}
           setOpen={setEditNavigationMenuOpen}
+          inMain={inMain}
+          setEditUiMenu={setEditUiMenu}
+          typeEditUiMenu={typeEditUiMenu}
         ></Menu>
       </div>
     </div>

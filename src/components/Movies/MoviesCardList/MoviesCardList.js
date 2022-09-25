@@ -19,7 +19,7 @@ function MoviesCardList() {
         <MoviesCard></MoviesCard>
         <MoviesCard></MoviesCard>
       </ul>
-      <button className="moviesCardList__button-next">Еще</button>
+      <button type="button" className="moviesCardList__button-next">Еще</button>
     </>
   );
 }

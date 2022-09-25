@@ -6,12 +6,12 @@ import Portfolio from "./Portfolio/Portfolio";
 
 function Main() {
   return(
-    <div className="main">
+    <main className="main">
       <Promo></Promo>
       <AboutProject></AboutProject>
       <Techs></Techs>
       <Portfolio></Portfolio>
-    </div>
+    </main>
 
   )
 }

@@ -16,19 +16,20 @@ function SearchForm() {
 
   return (
     <>
-      <div className="searchForm__container-search">
-        <button className="searchForm__button-search">
+      <form className="searchForm__container-search">
+        <button type="button" className="searchForm__button-search">
           <img src={searchicon} alt="иконка поиска" onClick={handleFocus} />
         </button>
         <input
           className="searchForm__input-search"
           placeholder="Фильмы"
           ref={searchInput}
+          required
         />
-        <button className="searchForm__button-search">
+        <button type="submit" className="searchForm__button-search">
           <img src={find} alt="кнопка поиска" onClick={handleFocus} />
         </button>
-      </div>
+      </form>
       <div className="searchForm__wrapper-changle-text">
         <RadioButton
           onChange={(e) => setToggle(e.target.checked)}

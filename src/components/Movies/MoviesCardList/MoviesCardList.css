@@ -14,7 +14,7 @@
 .moviesCardList__button-next {
   background: #f4f4f4;
   border-radius: 6px;
-  font-family: "Inter";
+  font-family: 'Inter', ‘Arial’, sans-serif;
   font-style: normal;
   font-weight: 500;
   font-size: 12px;
@@ -24,6 +24,10 @@
   border: none;
   width: 320px;
   height: 36px;
+}
+
+.moviesCardList__button-next:hover {
+  opacity: 0.8;
 }
 
 @media (max-width: 800px) {
@@ -38,7 +42,7 @@
 @media (max-width: 500px) {
   .moviesCardList {
     grid-template-columns: repeat(auto-fit, 295px);
-    row-gap: 34px;
+    row-gap: 19px;
     column-gap: 30px;
     margin-top: 88px;
   }

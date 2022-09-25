@@ -31,7 +31,7 @@ function Login(props) {
         <span className="login__span-input login__span-input_validation">
           Валидация
         </span>
-        <button
+        <button type="button"
           onClick={(e) => bittonLogin(e)}
           className="login__submit-button"
         >

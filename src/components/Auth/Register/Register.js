@@ -35,7 +35,7 @@ function Register() {
         <span className="register__span-input register__span-input_validation">
           Валидация
         </span>
-        <button className="register__submit-button">Зарегистрироваться</button>
+        <button type="button" className="register__submit-button">Зарегистрироваться</button>
       </form>
       <div className="register__wrapper-is-register">
         <span className="register__is-register">Уже зарегистрированы?</span>

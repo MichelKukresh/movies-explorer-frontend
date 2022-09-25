@@ -1,11 +1,15 @@
 .techs {
+  padding: 106px 70px 110px 70px;
+  box-sizing: border-box;
+  background-color: #F5F5F5;
+}
+
+.techs__wrapper {
   display: flex;
   flex-direction: column;
-  padding: 106px 70px 110px 70px;
-  max-width: 1280px;
+  max-width: 1140px;
   margin-left: auto;
   margin-right: auto;
-  box-sizing: border-box;
 }
 
 .techs__title {
@@ -99,6 +103,7 @@
 @media (max-width: 500px) {
   .techs {
     padding: 128px 20px 110px 20px;
+    background-color: #FAFAFA;
   }
 
   .techs__text-subtitle {

@@ -16,7 +16,7 @@
 }
 
 .searchForm__input-search::placeholder {
-  font-family: "Inter";
+  font-family: 'Inter', ‘Arial’, sans-serif;
   font-style: normal;
   font-weight: 500;
   font-size: 28px;
@@ -29,6 +29,10 @@
   border: none;
   background-color: #fafafa;
   padding: 0px;
+}
+
+.searchForm__button-search:hover {
+  opacity: 0.8;
 }
 
 .searchForm__wrapper-changle-text {

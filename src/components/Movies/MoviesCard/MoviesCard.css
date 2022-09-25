@@ -1,5 +1,5 @@
 .moviesCard {
-  font-family: "Inter";
+  font-family: 'Inter', ‘Arial’, sans-serif;
   font-style: normal;
   background: #ffffff;
   box-shadow: 0px 4px 30px rgba(0, 0, 0, 0.08);
@@ -40,6 +40,10 @@
   border: none;
   background-color: #ffffff;
   margin-right: 8px;
+}
+
+.moviesCard__button:hover {
+  opacity: 0.8;
 }
 
 @media (max-width: 800px) {

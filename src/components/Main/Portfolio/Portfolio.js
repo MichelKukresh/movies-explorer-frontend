@@ -13,11 +13,13 @@ function Portfolio() {
             Фронтенд-разработчик, 35 лет
           </p>
           <p className="portfolio__about">
-            Я родился и живу в Саратове, закончил факультет экономики СГУ. У
-            меня есть жена и дочь. Я люблю слушать музыку, а ещё увлекаюсь
-            бегом. Недавно начал кодить. С 2015 года работал в компании «СКБ
-            Контур». После того, как прошёл курс по веб-разработке, начал
-            заниматься фриланс-заказами и ушёл с постоянной работы.
+            Я родился в Волгограде и на данный момент живу в Химках, закончил
+            Ростовский институт РГУПС по специальности инженер связи. У
+            меня есть жена и дочь. Я люблю концерты под открытым не бом и
+            палаточный отдых, а ещё увлекаюсь бегом. Недавно начал кодить.
+            С 2006 года работал на железной дороге связистом. После того,
+            как прошёл курс по веб-разработке, начал заниматься фриланс-заказами
+            и ушёл с постоянной работы.
           </p>
           <p className="portfolio__git">Github</p>
           <p className="portfolio__portfolio">Портфолио</p>
@@ -33,8 +35,8 @@ function Portfolio() {
               href="https://michelkukresh.github.io/russian-travel/index.html"
             >
               Статичный сайт
-            </a>
             <img alt="стрелка" src={arrow} />
+            </a>
           </li>
           <li className="portfolio__text-link portfolio__text-link_border">
             <a
@@ -43,8 +45,8 @@ function Portfolio() {
               href="https://michelkukresh.github.io/mesto/index.html"
             >
               Адаптивный сайт
-            </a>
             <img alt="стрелка" src={arrow} />
+            </a>
           </li>
           <li className="portfolio__text-link">
             <a
@@ -53,8 +55,8 @@ function Portfolio() {
               href="https://kukreshma.students.nomoredomains.sbs"
             >
               Одностраничное приложение
-            </a>
             <img alt="стрелка" src={arrow} />
+            </a>
           </li>
         </ul>
       </div>

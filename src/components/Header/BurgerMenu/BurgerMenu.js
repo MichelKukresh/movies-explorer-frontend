@@ -5,11 +5,11 @@ import burgerL from "../../../images/burgerL.svg";
 function BurgerMenu(props) {
   return (
     <>
-      <button className="urgerMenu" onClick={(e) => props.setOpen(true)}>
-        <div className="urgerMenu__wrapper urgerMenu__wrapper_l">
+      <button type="button" className="burgerMenu" onClick={(e) => props.setOpen(true)}>
+        <div className="burgerMenu__wrapper burgerMenu__wrapper_l">
           <img src={burgerL} alt="картинка бургера" />
         </div>
-        <div className="urgerMenu__wrapper urgerMenu__wrapper_Xl">
+        <div className="burgerMenu__wrapper burgerMenu__wrapper_Xl">
           <img src={burgerXL} alt="картинка бургера" />
         </div>
       </button>

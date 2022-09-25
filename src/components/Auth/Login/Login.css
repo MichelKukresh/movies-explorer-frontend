@@ -1,5 +1,5 @@
 .login {
-  font-family: "Inter";
+  font-family: 'Inter', ‘Arial’, sans-serif;
   font-style: normal;
 }
 
@@ -7,7 +7,6 @@
   max-width: 400px;
   margin-left: auto;
   margin-right: auto;
-  padding-top: 70px;
 }
 
 .login__logo {
@@ -50,7 +49,7 @@
   width: 100%;
   border-radius: 3px;
   border: none;
-  font-family: "Inter";
+  font-family: 'Inter', ‘Arial’, sans-serif;
   font-style: normal;
   font-weight: 500;
   font-size: 14px;
@@ -59,6 +58,10 @@
   color: #ffffff;
   margin-top: 201px;
   margin-bottom: 16px;
+}
+
+.login__submit-button:hover {
+  opacity: 0.8;
 }
 
 .login__input-type {
@@ -84,12 +87,14 @@
   font-weight: 400;
   font-size: 14px;
   line-height: 17px;
-
+  text-decoration: none;
   text-align: center;
-
   color: #3456f3;
   border: none;
   background: #fafafa;
+}
+.login__in:hover {
+  opacity: 0.7;
 }
 
 .login__wrapper-is-login {
@@ -102,7 +107,7 @@
 @media (max-width: 780px) {
   .login__wrapper-logo {
     max-width: 395px;
-    padding-top: 232px;
+    padding-top: 0px;
   }
 
   .login__input-type {
@@ -113,7 +118,6 @@
 @media (max-width: 500px) {
   .login__wrapper-logo {
     width: 100%;
-    padding-top: 56px;
     text-align: center;
   }
 
@@ -130,7 +134,7 @@
   }
 
   .login__submit-button {
-    margin-top: 215px;
+    margin-top: 286px;
     margin-bottom: 14px;
   }
 

@@ -1,32 +1,33 @@
-.urgerMenu {
+.burgerMenu {
   border: none;
   display: none;
   background-color: #fafafa;
+  padding: 0px;
 }
 
-.urgerMenu__wrapper {
+.burgerMenu__wrapper {
   height: 38px;
 }
 
 @media (max-width: 800px) {
-  .urgerMenu {
+  .burgerMenu {
     display: block;
   }
 
-  .urgerMenu__wrapper {
+  .burgerMenu__wrapper {
     display: block;
   }
-  .urgerMenu__wrapper_l {
+  .burgerMenu__wrapper_l {
     display: none;
   }
 }
 
 @media (max-width: 500px) {
-  .urgerMenu__wrapper_l {
+  .burgerMenu__wrapper_l {
     display: block;
   }
 
-  .urgerMenu__wrapper_Xl {
+  .burgerMenu__wrapper_Xl {
     display: none;
   }
 }
