@@ -1,0 +1,33 @@
+.burgerMenu {
+  border: none;
+  display: none;
+  background-color: #fafafa;
+  padding: 0px;
+}
+
+.burgerMenu__wrapper {
+  height: 38px;
+}
+
+@media (max-width: 800px) {
+  .burgerMenu {
+    display: block;
+  }
+
+  .burgerMenu__wrapper {
+    display: block;
+  }
+  .burgerMenu__wrapper_l {
+    display: none;
+  }
+}
+
+@media (max-width: 500px) {
+  .burgerMenu__wrapper_l {
+    display: block;
+  }
+
+  .burgerMenu__wrapper_Xl {
+    display: none;
+  }
+}
