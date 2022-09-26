@@ -6,3 +6,6 @@
 
 ###### ссылка на сайт ( https://michelkukresh.github.io/movies-explorer-frontend/)
 ###### ссылка на макет [Figma](https://www.figma.com/file/Ty5BCeoGGS7WWawFwQL6rz/Diploma-(Copy)?node-id=891%3A3857)
+
+[]("homepage:https://michelkukresh.github.io/movies-explorer-frontend/")
+[]("deploy:gh-pages -d build")

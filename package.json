@@ -1,5 +1,5 @@
 {
-  "homepage": "https://michelkukresh.github.io/movies-explorer-frontend/",
+
   "name": "movies-explorer-frontend",
   "version": "0.1.0",
   "private": true,
@@ -19,7 +19,7 @@
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "predeploy": "npm run build",
-    "deploy": "gh-pages -d build"
+    "deploy": "npm run build && scp -r ./build/* kukreshma@51.250.110.232:/home/kukreshma/react-movies-api-full/movies-frontend"
   },
   "eslintConfig": {
     "extends": [
