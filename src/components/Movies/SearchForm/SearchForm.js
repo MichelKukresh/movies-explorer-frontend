@@ -5,13 +5,19 @@ import { useRef, useState } from "react";
 import searchicon from "../../../images/searchicon.svg";
 import find from "../../../images/find.svg";
 
-function SearchForm() {
+function SearchForm(props) {
   const [toggle, setToggle] = useState(false);
 
   const searchInput = useRef(null);
 
   function handleFocus() {
     searchInput.current.focus();
+  }
+
+  function handleSubmitButton(e) {
+    e.preventDefault();
+    props.handleinitialMovies(searchInput.current.value);
+
   }
 
   return (
@@ -26,7 +32,7 @@ function SearchForm() {
           ref={searchInput}
           required
         />
-        <button type="submit" className="searchForm__button-search">
+        <button type="submit" onClick={(e)=> handleSubmitButton(e)} className="searchForm__button-search">
           <img src={find} alt="кнопка поиска" onClick={handleFocus} />
         </button>
       </form>

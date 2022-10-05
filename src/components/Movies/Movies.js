@@ -3,12 +3,26 @@ import MoviesCardList from "./MoviesCardList/MoviesCardList";
 import Preloader from "./Preloader/Preloader";
 import SearchForm from "./SearchForm/SearchForm";
 
-function Movies() {
+function Movies(props) {
+
+  // typeEditUiMenu={typeEditUiMenu}
+
+
   return (
     <section className="movies">
       <div className="movies__container">
-        <SearchForm></SearchForm>
-        <MoviesCardList></MoviesCardList>
+        <SearchForm
+        handleinitialMovies={props.handleinitialMovies}
+        ></SearchForm>
+        <MoviesCardList
+       // hahdleDeleteInSadedMovies={props.hahdleDeleteInSadedMovies}
+        typeEditUiMenu={props.typeEditUiMenu}
+        movies={props.movies}
+       // hahdleAddInSadedMovies={props.hahdleAddInSadedMovies}
+       hahdleDeleteAndAddSadedMovies={props.hahdleDeleteAndAddSadedMovies}
+        moviesSaved={props.moviesSaved}
+        //keyValue={props.moviesSaved.id}
+        ></MoviesCardList>
         <Preloader></Preloader>
       </div>
     </section>

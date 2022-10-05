@@ -51,6 +51,10 @@
   background-color: #fafafa;
 }
 
+.header__link_landing {
+  background-color: #dddee3;
+}
+
 .header__link_activ {
   font-weight: 500;
 }
@@ -129,6 +133,10 @@
   min-height: 32px;
   margin-top: auto;
   margin-bottom: auto;
+}
+
+.header__buttom-akkaunt_landing {
+  background-color: #dddee3;
 }
 
 .header__buttom-akkaunt:hover {

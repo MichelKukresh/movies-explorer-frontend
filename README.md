@@ -4,8 +4,13 @@
 
 ###### Создана файловая структура по БЭМ (Nested). Фреймворк React.js. Используются контейнеры flex, grid адаптирован под различные зазрешения и браузеры.
 
-###### ссылка на сайт ( https://michelkukresh.github.io/movies-explorer-frontend/)
+###### ссылка на deploy фронтенда [GitHub]( https://michelkukresh.github.io/movies-explorer-frontend/)
+
+##### ссылка на [сайт](https://kukreshma.moviesexplorer.nomorepartiesxyz.ru)
+
 ###### ссылка на макет [Figma](https://www.figma.com/file/Ty5BCeoGGS7WWawFwQL6rz/Diploma-(Copy)?node-id=891%3A3857)
 
-[]("homepage:https://michelkukresh.github.io/movies-explorer-frontend/")
-[]("deploy:gh-pages -d build")
+## планируется: 
+- приведение функционалу к заданию
+- убрать комментрарии, лишний код
+- исправить отображение ссылки .slice(28, ), так как при http картинку подгружаться не будут.
