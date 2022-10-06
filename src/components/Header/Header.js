@@ -45,7 +45,7 @@ function Header(props) {
         <a className="header__logo-link" href="/movies-explorer-frontend">
           <img className="header__logo" src={logo} alt="логотип" />{" "}
         </a>
-        {!isLandibg && !isAuth &&  (
+        {!isAuth && props.loggedIn &&  (
           <BurgerMenu setOpen={props.setOpen}></BurgerMenu>
         )}
         {(isProfile || props.loggedIn) && (

@@ -226,7 +226,8 @@ function App() {
     console.log(item);
     console.log(movies);
     api.savededMovies(item).then((newItem) => {
-      console.log(newItem.data);
+      //console.log(newItem.data);
+      console.log("klklklklklkl");
 
 
       setMoviesSaved(moviesSaved => [newItem.data, ...moviesSaved]);
@@ -240,15 +241,19 @@ function App() {
         director: newItem.data.director,
         duration: newItem.data.duration,
         id: newItem.data.movieId,
-        image: {url : newItem.data.image.slice(28, )},
+        image: { url : newItem.data.image.slice(28, ),
+                formats: { thumbnail: { url: newItem.data.thumbnail.slice(28, )} } },
         nameEN: newItem.data.nameEN,
         nameRU: newItem.data.nameRU,
         trailerLink: newItem.data.trailerLink,
+
+
+       // thumbnail: `${MOVE_URL}${data.item.image.formats.thumbnail.url}`,
         year: newItem.data.year,
       };
 
-      console.log("klklklklklkl");
-      console.log(newItem);
+
+      //console.log(newItem);
 
       return nm;
 
@@ -288,12 +293,15 @@ function App() {
 
   function hahdleDeleteAndAddSadedMovies(data) {
 
+    console.log(data.item);
+
     switch (data.typeEditUiMenu) {
       case "movies":
         const isSaved = data.moviesSaved.find(
           (i) => i.movieId === data.item.id
         );
         if (isSaved) {
+          hahdleDeleteInSadedMovies(isSaved._id);
         } else {
           hahdleAddInSadedMovies({
             country: data.item.country,
@@ -337,6 +345,7 @@ function App() {
                     loggedIn={loggedIn}
                     setEditUiMenu={setEditUiMenu}
                     type="landing"
+                    setOpen={setEditNavigationMenuOpen}
                   />
                   <Main></Main>
                   <Footer></Footer>
@@ -385,6 +394,8 @@ function App() {
                       inSavedMovies={inSavedMovies}
                       setEditUiMenu={setEditUiMenu}
                       typeEditUiMenu={typeEditUiMenu}
+                      loggedIn={loggedIn}
+
                     ></Header>
                     <Profile
                       handleUpdateUser={handleUpdateUser}
@@ -406,6 +417,7 @@ function App() {
                       inSavedMovies={inSavedMovies}
                       setEditUiMenu={setEditUiMenu}
                       typeEditUiMenu={typeEditUiMenu}
+                      loggedIn={loggedIn}
                     ></Header>
                     <Movies
                       movies={movies}
@@ -435,6 +447,7 @@ function App() {
                       inSavedMovies={inSavedMovies}
                       setEditUiMenu={setEditUiMenu}
                       typeEditUiMenu={typeEditUiMenu}
+                      loggedIn={loggedIn}
                     ></Header>
                     <SavedMovies
                       //hahdleDeleteInSadedMovies={hahdleDeleteInSadedMovies}

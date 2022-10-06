@@ -1,8 +1,9 @@
 .burgerMenu {
   border: none;
   display: none;
-  background-color: #fafafa;
+  /* background-color: #fafafa; */
   padding: 0px;
+  background-color: inherit;
 }
 
 .burgerMenu__wrapper {
