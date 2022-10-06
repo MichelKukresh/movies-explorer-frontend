@@ -32,6 +32,7 @@ function App() {
   const [movies, setMovies] = useState([]);
   const [moviesSaved, setMoviesSaved] = useState([]);
   // const [moviesOllOnApi, setMoviesOllOnApi] = useState([]);
+  const [isVisiblePreloader, setVisiblePreloader] = useState(false);
 
   //хранение данных при регистрации
   const [userDaraRegister, setUserDaraRegister] = useState({
@@ -60,8 +61,10 @@ function App() {
           setCurrentUser(data);
         }),
 
-        api.getInitialMovies().then((data) => setMoviesSaved(data.data))
-        .then((data) => console.log(moviesSaved)),
+        api
+          .getInitialMovies()
+          .then((data) => setMoviesSaved(data.data))
+          .then((data) => console.log(moviesSaved)),
         // api.getInitialCards().then((data) => {
         //   setCards(
         //     data.data.map((item) => ({
@@ -187,6 +190,7 @@ function App() {
   }
 
   function handleinitialMovies(search) {
+    setVisiblePreloader(true);
     // setButtonInfomationAboutSave("Сохранение...");
     moviesApi
       .getInitialMovies()
@@ -205,71 +209,50 @@ function App() {
       })
       .then((data) => {
         setMovies(data.map((item) => item));
+        setVisiblePreloader(false);
       })
 
       .catch((err) => {
         console.log(err);
-      });
-    // .finally(() => setButtonInfomationAboutSave("Сохранить"));
+      })
+    .finally(() => setVisiblePreloader(false));
   }
-
-  // function aa(id) {
-  //   console.log(id);
-  //   console.log(moviesOllOnApi);
-  //  const sss = moviesOllOnApi.find((i) => i.id === id )
-  //  console.log(sss);
-  //  return sss;
-  // }
 
   // добавление фильма в сохраненные
   function hahdleAddInSadedMovies(item) {
     console.log(item);
     console.log(movies);
-    api.savededMovies(item).then((newItem) => {
-      //console.log(newItem.data);
-      console.log("klklklklklkl");
+    api
+      .savededMovies(item)
+      .then((newItem) => {
+        setMoviesSaved((moviesSaved) => [newItem.data, ...moviesSaved]);
+        const nm = {
+          country: newItem.data.country,
+          description: newItem.data.description,
+          director: newItem.data.director,
+          duration: newItem.data.duration,
+          id: newItem.data.movieId,
+          image: {
+            url: newItem.data.image.slice(28),
+            formats: { thumbnail: { url: newItem.data.thumbnail.slice(28) } },
+          },
+          nameEN: newItem.data.nameEN,
+          nameRU: newItem.data.nameRU,
+          trailerLink: newItem.data.trailerLink,
 
+          // thumbnail: `${MOVE_URL}${data.item.image.formats.thumbnail.url}`,
+          year: newItem.data.year,
+        };
 
-      setMoviesSaved(moviesSaved => [newItem.data, ...moviesSaved]);
+        //console.log(newItem);
 
-
-
-
-      const nm = {
-        country: newItem.data.country,
-        description: newItem.data.description,
-        director: newItem.data.director,
-        duration: newItem.data.duration,
-        id: newItem.data.movieId,
-        image: { url : newItem.data.image.slice(28, ),
-                formats: { thumbnail: { url: newItem.data.thumbnail.slice(28, )} } },
-        nameEN: newItem.data.nameEN,
-        nameRU: newItem.data.nameRU,
-        trailerLink: newItem.data.trailerLink,
-
-
-       // thumbnail: `${MOVE_URL}${data.item.image.formats.thumbnail.url}`,
-        year: newItem.data.year,
-      };
-
-
-      //console.log(newItem);
-
-      return nm;
-
-
-
-
-    }).then((nm)=> {
-      setMovies((movies) =>
-      movies.map((c) => (c.id === item.movieId ? nm : c))
+        return nm;
+      })
+      .then((nm) => {
+        setMovies((movies) =>
+          movies.map((c) => (c.id === item.movieId ? nm : c))
         );
-
-
-
-    })
-
-    ;
+      });
   }
 
   // .then((newCard) => {
@@ -281,18 +264,15 @@ function App() {
   // удаление из сохраненных
   function hahdleDeleteInSadedMovies(id) {
     api.deleteMovie(id).then((newItem) => {
-
-
-      setMoviesSaved(((moviesSaved) => moviesSaved.filter((c) => (c._id !== newItem.data._id) ? c : null)) )
-
-
+      setMoviesSaved((moviesSaved) =>
+        moviesSaved.filter((c) => (c._id !== newItem.data._id ? c : null))
+      );
     });
   }
 
   // принятие решения удалить или сохранить и сформировать объект
 
   function hahdleDeleteAndAddSadedMovies(data) {
-
     console.log(data.item);
 
     switch (data.typeEditUiMenu) {
@@ -395,7 +375,6 @@ function App() {
                       setEditUiMenu={setEditUiMenu}
                       typeEditUiMenu={typeEditUiMenu}
                       loggedIn={loggedIn}
-
                     ></Header>
                     <Profile
                       handleUpdateUser={handleUpdateUser}
@@ -420,6 +399,7 @@ function App() {
                       loggedIn={loggedIn}
                     ></Header>
                     <Movies
+                      isVisiblePreloader={isVisiblePreloader}
                       movies={movies}
                       handleinitialMovies={handleinitialMovies}
                       //hahdleAddInSadedMovies={hahdleAddInSadedMovies}

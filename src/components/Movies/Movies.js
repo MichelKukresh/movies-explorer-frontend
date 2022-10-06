@@ -14,16 +14,19 @@ function Movies(props) {
         <SearchForm
         handleinitialMovies={props.handleinitialMovies}
         ></SearchForm>
-        <MoviesCardList
-       // hahdleDeleteInSadedMovies={props.hahdleDeleteInSadedMovies}
-        typeEditUiMenu={props.typeEditUiMenu}
-        movies={props.movies}
-       // hahdleAddInSadedMovies={props.hahdleAddInSadedMovies}
-       hahdleDeleteAndAddSadedMovies={props.hahdleDeleteAndAddSadedMovies}
-        moviesSaved={props.moviesSaved}
-        //keyValue={props.moviesSaved.id}
-        ></MoviesCardList>
-        <Preloader></Preloader>
+
+          { !props.isVisiblePreloader && <MoviesCardList
+          // hahdleDeleteInSadedMovies={props.hahdleDeleteInSadedMovies}
+          typeEditUiMenu={props.typeEditUiMenu}
+          movies={props.movies}
+          // hahdleAddInSadedMovies={props.hahdleAddInSadedMovies}
+          hahdleDeleteAndAddSadedMovies={props.hahdleDeleteAndAddSadedMovies}
+          moviesSaved={props.moviesSaved}
+          //keyValue={props.moviesSaved.id}
+          ></MoviesCardList> }
+
+        { props.isVisiblePreloader && <Preloader></Preloader>}
+
       </div>
     </section>
   );
