@@ -18,6 +18,7 @@ import "./App.css";
 import { api } from "../../utils/MainApi";
 import { moviesApi } from "../../utils/MoviesApi";
 import { MOVE_URL } from "../../utils/initialCards";
+import ScreenSize from "../../utils/hooksScreenSize";
 
 function App() {
   const navigate = useNavigate();
@@ -33,6 +34,13 @@ function App() {
   const [moviesSaved, setMoviesSaved] = useState([]);
   // const [moviesOllOnApi, setMoviesOllOnApi] = useState([]);
   const [isVisiblePreloader, setVisiblePreloader] = useState(false);
+  const [messageForNotFound, setMessageForNotFound] = useState("");
+
+  // модуль отображения количесва фильмов в зависимости от разрешения
+  const [columnAndRow, srtColumnAndRow] = useState({column: 0, row: 0, card: 0});
+  const [changeableArrayDependingScreenSize, setChangeableArrayDependingScreenSize] = useState([]); // массив карточек который идет на отрисовку в зависимости от экрана
+  const [dataButtonNext, setDataButtonNext] = useState({isVisible: false, howMuchAddmovies: 0});
+
 
   //хранение данных при регистрации
   const [userDaraRegister, setUserDaraRegister] = useState({
@@ -61,10 +69,8 @@ function App() {
           setCurrentUser(data);
         }),
 
-        api
-          .getInitialMovies()
-          .then((data) => setMoviesSaved(data.data))
-          .then((data) => console.log(moviesSaved)),
+        api.getInitialMovies().then((data) => setMoviesSaved(data.data)),
+        //.then((data) => console.log(moviesSaved)),
         // api.getInitialCards().then((data) => {
         //   setCards(
         //     data.data.map((item) => ({
@@ -190,6 +196,7 @@ function App() {
   }
 
   function handleinitialMovies(search) {
+    setMessageForNotFound("");
     setVisiblePreloader(true);
     // setButtonInfomationAboutSave("Сохранение...");
     moviesApi
@@ -203,6 +210,11 @@ function App() {
           .map((e) => String(Object.values(e)).match(re) != null && e)
           .filter((e) => e !== false);
         // setMoviesOllOnApi(foundMoviesID);
+        const checkMessageForNotFound =
+          foundMoviesID.length === 0 ? "Ничего не найдено" : "";
+        setMessageForNotFound(checkMessageForNotFound);
+
+
         return foundMoviesID;
 
         // console.log(foundMoviesID);
@@ -210,12 +222,16 @@ function App() {
       .then((data) => {
         setMovies(data.map((item) => item));
         setVisiblePreloader(false);
+        changeableArray();
       })
 
       .catch((err) => {
+        setMessageForNotFound(
+          "Во время запроса произошла ошибка. Возможно, проблема с соединением или сервер недоступен. Подождите немного и попробуйте ещё раз."
+        );
         console.log(err);
       })
-    .finally(() => setVisiblePreloader(false));
+      .finally(() => setVisiblePreloader(false));
   }
 
   // добавление фильма в сохраненные
@@ -249,8 +265,10 @@ function App() {
         return nm;
       })
       .then((nm) => {
-        setMovies((movies) =>
-          movies.map((c) => (c.id === item.movieId ? nm : c))
+        //setMovies((movies) =>
+          //movies.map((c) => (c.id === item.movieId ? nm : c))
+          setChangeableArrayDependingScreenSize((changeableArrayDependingScreenSize) =>
+          changeableArrayDependingScreenSize.map((c) => (c.id === item.movieId ? nm : c))
         );
       });
   }
@@ -273,7 +291,6 @@ function App() {
   // принятие решения удалить или сохранить и сформировать объект
 
   function hahdleDeleteAndAddSadedMovies(data) {
-    console.log(data.item);
 
     switch (data.typeEditUiMenu) {
       case "movies":
@@ -307,6 +324,84 @@ function App() {
         break;
     }
   }
+
+  // модуль отображения количесва фильмов в зависимости от разрешения, расчитывает сколько добавлять и сколько осталось
+      //определяем изначальный массив с ним и будем сравнивать всегда
+
+
+      //const [columnAndRow, srtColumnAndRow] = useState({column: 0, row: 0, card: 0})
+      //const [changeableArrayDependingScreenSize, setChangeableArrayDependingScreenSize] = useState([]);
+      //const [dataButtonNext, setDataButtonNext] = useState({isVisible: false, howMuchAddmovies: 0});
+
+
+  const size = ScreenSize();
+  //const maxWithScrin = 1280;
+  const middleWithScrin = 768;
+  const minWithScrin = 480;
+
+
+      useEffect(()=> {
+       if (size.With < minWithScrin) {
+         srtColumnAndRow({column: 1, row: 5, card: 5, add: 2})
+       } else if (size.With < middleWithScrin ) {
+         srtColumnAndRow({column: 2, row: 8, card: 16, add: 2})
+       } else {
+         srtColumnAndRow({column: 3, row: 3, card: 12, add: 3})
+       }
+
+       changeableArray ();
+
+      //
+      //  setChangeableDependingScreenSize(changeableArray);
+
+      }, [size.With, movies])
+
+      // шинкует массив ( сколько было отрисовано по экрану? сколько нужно открывать при нажатии на еще?)
+      function changeableArray () {
+
+        const changeableArrayFromRender = movies.slice(0, (columnAndRow.card) );
+        setChangeableArrayDependingScreenSize(changeableArrayFromRender);
+
+        const isVisibleNext = changeableArrayFromRender.length >= movies.length ? false : true;
+        console.log("gggggggggggggggggggg");
+        console.log(changeableArrayFromRender.length);
+        console.log(movies.length);
+        console.log(isVisibleNext);
+        setDataButtonNext({isVisible: isVisibleNext});
+        console.log(dataButtonNext.isVisible);
+
+
+      }
+
+      function handleButtonNextMovies() {
+
+     //const arr = changeableArrayDependingScreenSize.length + columnAndRow.add;
+     console.log(changeableArrayDependingScreenSize);
+     setChangeableArrayDependingScreenSize( movies.slice(0, (changeableArrayDependingScreenSize.length + columnAndRow.add)));
+
+     const isVisibleNext = (changeableArrayDependingScreenSize.length + columnAndRow.add) >= movies.length ? false : true;
+     console.log(changeableArrayDependingScreenSize);
+     console.log(changeableArrayDependingScreenSize.length);
+     console.log(movies.length);
+        setDataButtonNext({isVisible: isVisibleNext});
+        console.log(dataButtonNext.isVisible);
+
+
+
+         // первоначально загружает нужно количесво карточек и меняет
+
+         //setChangeableArrayDependingScreenSize(changeableArray);
+
+         //console.log("кнопка еще пока не работает");
+         //console.log(changeableArray);
+
+     }
+
+     //console.log(size.With);
+
+
+
+
 
   return (
     <CurrentUserContext.Provider value={currentUser}>
@@ -399,8 +494,12 @@ function App() {
                       loggedIn={loggedIn}
                     ></Header>
                     <Movies
+                    dataButtonNext={dataButtonNext}
+                    handleButtonNextMovies={handleButtonNextMovies}
+                      setMessageForNotFound={setMessageForNotFound}
+                      messageForNotFound={messageForNotFound}
                       isVisiblePreloader={isVisiblePreloader}
-                      movies={movies}
+                      movies={changeableArrayDependingScreenSize}
                       handleinitialMovies={handleinitialMovies}
                       //hahdleAddInSadedMovies={hahdleAddInSadedMovies}
                       moviesSaved={moviesSaved}

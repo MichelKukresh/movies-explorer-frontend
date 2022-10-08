@@ -5,19 +5,19 @@ function Menu(props) {
   function handlButtonToMovies(e) {
     e.preventDefault();
     props.inMovies();
-    props.setEditUiMenu("/movies");
+    props.setEditUiMenu("movies");
   }
 
   function handlButtonToSavedMovies(e) {
     e.preventDefault();
     props.inSavedMovies();
-    props.setEditUiMenu("/saved-movies");
+    props.setEditUiMenu("saved-movies");
   }
 
   function handlButtonToMaini(e) {
     e.preventDefault();
     props.inMain();
-    props.setEditUiMenu("/main");
+    props.setEditUiMenu("movies-explorer-frontend");
   }
 
   return (

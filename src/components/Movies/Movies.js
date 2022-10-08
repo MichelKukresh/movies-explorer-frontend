@@ -1,32 +1,26 @@
 import "./Movies.css";
 import MoviesCardList from "./MoviesCardList/MoviesCardList";
-import Preloader from "./Preloader/Preloader";
+
 import SearchForm from "./SearchForm/SearchForm";
 
 function Movies(props) {
-
-  // typeEditUiMenu={typeEditUiMenu}
-
-
   return (
     <section className="movies">
       <div className="movies__container">
         <SearchForm
-        handleinitialMovies={props.handleinitialMovies}
+          handleinitialMovies={props.handleinitialMovies}
+          setMessageForNotFound={props.setMessageForNotFound}
         ></SearchForm>
-
-          { !props.isVisiblePreloader && <MoviesCardList
-          // hahdleDeleteInSadedMovies={props.hahdleDeleteInSadedMovies}
+        <MoviesCardList
+        dataButtonNext={props.dataButtonNext}
+        handleButtonNextMovies={props.handleButtonNextMovies}
           typeEditUiMenu={props.typeEditUiMenu}
           movies={props.movies}
-          // hahdleAddInSadedMovies={props.hahdleAddInSadedMovies}
           hahdleDeleteAndAddSadedMovies={props.hahdleDeleteAndAddSadedMovies}
           moviesSaved={props.moviesSaved}
-          //keyValue={props.moviesSaved.id}
-          ></MoviesCardList> }
-
-        { props.isVisiblePreloader && <Preloader></Preloader>}
-
+          isVisiblePreloader={props.isVisiblePreloader}
+          messageForNotFound={props.messageForNotFound}
+        ></MoviesCardList>
       </div>
     </section>
   );

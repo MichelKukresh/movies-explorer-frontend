@@ -5,91 +5,25 @@ import save from "../../../images/save9.svg";
 import { MOVE_URL } from "../../../utils/initialCards";
 
 function MoviesCard(props) {
-
-
-
-// определяем страницу где будут загружаться карточки (сохраненные или нет)
-const isTypeSavedMoviesSite = props.typeEditUiMenu === "saved-movies";
-// const isTypeMoviesSite = props.typeEditUiMenu === "movies";
+  // определяем страницу где будут загружаться карточки (сохраненные или нет)
+  const isTypeSavedMoviesSite = props.typeEditUiMenu === "saved-movies";
+  // const isTypeMoviesSite = props.typeEditUiMenu === "movies";
 
   let isSaved;
   let linkImages;
-  if(isTypeSavedMoviesSite) { // определяем как загружать карточки (из за разници api карточки формируются по разному))
+  if (isTypeSavedMoviesSite) {
+    // определяем как загружать карточки (из за разници api карточки формируются по разному))
     isSaved = true;
     linkImages = props.item.image;
-
-
   } else {
-    //console.log(props.moviesSaved.movieId);
-    //console.log(props.moviesSaved.movieId);
-
-    console.log(props.item.id);
-    console.log("^------------------------------------");
-
     isSaved = props.moviesSaved.find((i) => i.movieId === props.item.id);
-      console.log(isSaved);
-
-      // const a = (props.item.id == i.movieId ) ? "!!!  совпадает": " НЕ совпадает";
-      // console.log(a);
-      // console.log("-------------------------------------");
-
-
-    //});//
     linkImages = `${MOVE_URL}${props.item.image.url}`;
-    // const a = isSaved? isSaved._id : "не найдено";
-    //console.log(props.moviesSaved);
-    //const pp = props.moviesSaved.find((i) => i.movieId === props.item.id);
-    //console.log(pp);
   }
 
   const moviesSavedButtonImages = isSaved ? save : noSave;
-
-
-  //onsole.log(`isSaved статус при довавление ${isSaved._id}`);
-
   const hahdleSavedMoviesButton = () => {
     props.hahdleDeleteAndAddSadedMovies(props);
-
-
-
-    // if(isSaved) {
-    //   props.hahdleDeleteInSadedMovies(isSaved._id);
-    //   console.log("!!!!!!!!!!!!!!Удаление");
-
-    // } else {
-    //   console.log("!!!!!!!!!!!!!!!!!!!!Добавление");
-
-    //   props.hahdleAddInSadedMovies({
-
-    //     country: props.item.country,
-    //     director: props.item.director,
-    //     duration: props.item.duration,
-    //     year: props.item.year,
-    //     description: props.item.description,
-    //     image: linkImages,
-    //     trailerLink: props.item.trailerLink,
-    //     thumbnail: `${MOVE_URL}${props.item.image.formats.thumbnail.url}`,
-    //     nameRU: props.item.nameRU,
-    //     nameEN: props.item.nameEN,
-    //     movieId: props.item.id,
-    //   });
-
-    // }
-  }
-
-
-  // function hahdleSavedMoviesButton(id) {
-
-
-  // }
-
-  // function hahdleSavedMoviesButton() {
-
-  // }
-
-  //console.log("Итерация");
-
-  //console.log(linkImages);
+  };
 
   return (
     <li className="moviesCard">

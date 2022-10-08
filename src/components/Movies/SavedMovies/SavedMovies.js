@@ -7,9 +7,9 @@ function SavedMovies(props) {
   return (
     <section className="movies">
       <div className="movies__container">
-        <SearchForm
+        {/* <SearchForm
           handleinitialMovies={props.handleinitialMovies}
-        ></SearchForm>
+        ></SearchForm> */}
         <MoviesCardList
           moviesSaved={props.moviesSaved}
           typeEditUiMenu={props.typeEditUiMenu}

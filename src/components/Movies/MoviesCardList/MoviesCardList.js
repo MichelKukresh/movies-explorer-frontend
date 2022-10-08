@@ -1,50 +1,49 @@
+import { useEffect, useState } from "react";
+import ScreenSize from "../../../utils/hooksScreenSize";
 import MoviesCard from "../MoviesCard/MoviesCard";
+import Preloader from "../Preloader/Preloader";
 import "./MoviesCardList.css";
 
 function MoviesCardList(props) {
 
-  console.log(props.moviesSaved);
-
-  // // определяем страницу где будут загружаться карточки (сохраненные или нет)
-  // switch (props.typeEditUiMenu) {
-  //   case 'saved-movies':
-  //     console.log('')
-  //     break
-  //   case 'movies':
-  //     console.log('')
-  //     break
-  //   default:
-  //     console.log('Тип страници не задан')
-  //     break
-  // }
+  const isTypeSavedMoviesSite = props.typeEditUiMenu === "saved-movies";
+  // const isTypeMoviesSite = props.typeEditUiMenu === "movies";
 
 
-// определяем страницу где будут загружаться карточки (сохраненные или нет)
-const isTypeSavedMoviesSite = props.typeEditUiMenu === "saved-movies";
-// const isTypeMoviesSite = props.typeEditUiMenu === "movies";
 
-const moviesArrForRender = isTypeSavedMoviesSite ?  props.moviesSaved : props.movies;
+  const moviesArrForRender = isTypeSavedMoviesSite
+    ? props.moviesSaved
+    : props.movies;
 
-//const keyValue = isTypeSavedMoviesSite ? moviesArrForRender._id : moviesArrForRender.id;
-
-//console.log(moviesArrForRender);
+function handleButtonNext() {
+  props.handleButtonNextMovies();
+  console.log("пока не работае кнопка");
+  console.log(props.dataButtonNext.isVisible);
+}
 
   return (
-    <>
-      <ul className="moviesCardList">
-        {moviesArrForRender?.map((movies) => (<MoviesCard
-        //hahdleAddInSadedMovies={props.hahdleAddInSadedMovies}
-        moviesSaved={props.moviesSaved} // в saved-movies массив не передается
-        typeEditUiMenu={props.typeEditUiMenu}
-        item={movies} // в movies передается пропс props.moviesSaved
-        //key={props.keyValue}
-        key={Math.random()}
-       // hahdleDeleteInSadedMovies={props.hahdleDeleteInSadedMovies}
-       hahdleDeleteAndAddSadedMovies={props.hahdleDeleteAndAddSadedMovies}
-        ></MoviesCard>))}
-      </ul>
-      <button type="button" className="moviesCardList__button-next">Еще</button>
-    </>
+    <div className="moviesCardList">
+      {!props.isVisiblePreloader && (
+        <ul className="moviesCardList__container">
+          {moviesArrForRender?.map((movies) => (
+            <MoviesCard
+              moviesSaved={props.moviesSaved} // в saved-movies массив не передается
+              typeEditUiMenu={props.typeEditUiMenu}
+              item={movies} // в movies передается пропс props.moviesSaved
+              key={Math.random()}
+              hahdleDeleteAndAddSadedMovies={
+                props.hahdleDeleteAndAddSadedMovies
+              }
+            ></MoviesCard>
+          ))}
+        </ul>
+      )}
+      {props.isVisiblePreloader && <Preloader></Preloader>}
+      {props.messageForNotFound}
+        {props.dataButtonNext.isVisible && <button onClick={()=> handleButtonNext()} type="button" className="moviesCardList__button-next">
+          Еще
+        </button>}
+    </div>
   );
 }
 

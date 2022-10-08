@@ -20,6 +20,10 @@ function SearchForm(props) {
 
   }
 
+  function resetMessageForNotFound(e) {
+    props.setMessageForNotFound("");
+  }
+
   return (
     <>
       <form className="searchForm__container-search">
@@ -31,6 +35,7 @@ function SearchForm(props) {
           placeholder="Фильмы"
           ref={searchInput}
           required
+          onChange={(e) => resetMessageForNotFound(e)}
         />
         <button type="submit" onClick={(e)=> handleSubmitButton(e)} className="searchForm__button-search">
           <img src={find} alt="кнопка поиска" onClick={handleFocus} />
