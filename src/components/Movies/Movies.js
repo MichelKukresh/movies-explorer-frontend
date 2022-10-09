@@ -8,6 +8,8 @@ function Movies(props) {
     <section className="movies">
       <div className="movies__container">
         <SearchForm
+        toggleCheckbox={props.toggleCheckbox}
+        setToggleCheckbox={props.setToggleCheckbox}
           handleinitialMovies={props.handleinitialMovies}
           setMessageForNotFound={props.setMessageForNotFound}
         ></SearchForm>

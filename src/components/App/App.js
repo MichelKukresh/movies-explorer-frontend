@@ -31,7 +31,8 @@ function App() {
   const [isOpenPopapRegistration, setOpenPopapRegistration] = useState(false);
   const [isOpenPopapLodegin, setOpenPopaLodegin] = useState(false);
   const [movies, setMovies] = useState([]);
-  const [moviesSaved, setMoviesSaved] = useState([]);
+  const [moviesSavedData, setMoviesSavedData] = useState([]); // для отрисовки данных на странице, в том числе и для манипуляций с поиском
+  const [moviesSaved, setMoviesSaved] = useState([]); // для хранения данных сохраненных с сервера
   // const [moviesOllOnApi, setMoviesOllOnApi] = useState([]);
   const [isVisiblePreloader, setVisiblePreloader] = useState(false);
   const [messageForNotFound, setMessageForNotFound] = useState("");
@@ -41,6 +42,7 @@ function App() {
   const [changeableArrayDependingScreenSize, setChangeableArrayDependingScreenSize] = useState([]); // массив карточек который идет на отрисовку в зависимости от экрана
   const [dataButtonNext, setDataButtonNext] = useState({isVisible: false, howMuchAddmovies: 0});
 
+  const [toggleCheckbox, setToggleCheckbox] = useState(false);
 
   //хранение данных при регистрации
   const [userDaraRegister, setUserDaraRegister] = useState({
@@ -120,6 +122,9 @@ function App() {
   function inSavedMovies() {
     navigate("/saved-movies");
     setEditNavigationMenuOpen(false);
+    setMoviesSavedData(moviesSaved);
+
+
   }
 
   // function inProfile() {
@@ -153,6 +158,7 @@ function App() {
   //обработка логина
   const hahdleSubmitLogin = (dataRegister) => {
     // e.preventDefault();
+    setErrorMesage("");
 
     login(dataRegister)
       .then((data) => {
@@ -165,6 +171,7 @@ function App() {
       })
       .catch((err) => {
         console.log(err);
+        setErrorMesage(err);
         //setSuccessfulRegistration(false);
         //setEditRegisterPopupPopupOpen(true);
       });
@@ -195,6 +202,8 @@ function App() {
     // .finally(() => setButtonInfomationAboutSave("Сохранить"));
   }
 
+  ////////////////////////////////////////
+
   function handleinitialMovies(search) {
     setMessageForNotFound("");
     setVisiblePreloader(true);
@@ -202,20 +211,21 @@ function App() {
     moviesApi
       .getInitialMovies()
       .then((data) => {
-        // console.log(search);
-        // console.log(data);
         // closeAllPopups();
         const re = new RegExp(`${search}`, "i");
         const foundMoviesID = data
           .map((e) => String(Object.values(e)).match(re) != null && e)
           .filter((e) => e !== false);
+
+          const folterShortMovie = !toggleCheckbox ? foundMoviesID : foundMoviesID.filter((e) => e.duration <= 40 ) ;
+          console.log(folterShortMovie);
         // setMoviesOllOnApi(foundMoviesID);
         const checkMessageForNotFound =
           foundMoviesID.length === 0 ? "Ничего не найдено" : "";
         setMessageForNotFound(checkMessageForNotFound);
 
 
-        return foundMoviesID;
+        return folterShortMovie;
 
         // console.log(foundMoviesID);
       })
@@ -232,6 +242,30 @@ function App() {
         console.log(err);
       })
       .finally(() => setVisiblePreloader(false));
+  }
+
+  //////////////////////////////////////////// поиск среди сохраненных фильмов
+  function handleinitialMoviesInSavedMovies(searchInSavedMovies) {
+    const re = new RegExp(`${searchInSavedMovies}`, "i");
+        const foundMoviesID = moviesSaved
+          .map((e) => String(Object.values(e)).match(re) != null && e)
+          .filter((e) => e !== false);
+
+          const folterShortMovie = !toggleCheckbox ? foundMoviesID : foundMoviesID.filter((e) => e.duration <= 40 ) ;
+          console.log(folterShortMovie);
+          setMoviesSavedData(folterShortMovie);
+        // setMoviesOllOnApi(foundMoviesID);
+        const checkMessageForNotFound =
+          foundMoviesID.length === 0 ? "Ничего не найдено" : "";
+        setMessageForNotFound(checkMessageForNotFound);
+
+        //   const [moviesSavedData, setMoviesSavedData] = useState([]); // для отрисовки данных на странице, в том числе и для манипуляций с поиском
+  // const [moviesSaved, setMoviesSaved] = useState([]); // для хранения данных сохраненных с сервера
+
+       // return folterShortMovie;
+
+
+
   }
 
   // добавление фильма в сохраненные
@@ -336,7 +370,7 @@ function App() {
 
   const size = ScreenSize();
   //const maxWithScrin = 1280;
-  const middleWithScrin = 768;
+  const middleWithScrin = 1272;
   const minWithScrin = 480;
 
 
@@ -363,12 +397,9 @@ function App() {
         setChangeableArrayDependingScreenSize(changeableArrayFromRender);
 
         const isVisibleNext = changeableArrayFromRender.length >= movies.length ? false : true;
-        console.log("gggggggggggggggggggg");
-        console.log(changeableArrayFromRender.length);
-        console.log(movies.length);
-        console.log(isVisibleNext);
+
         setDataButtonNext({isVisible: isVisibleNext});
-        console.log(dataButtonNext.isVisible);
+
 
 
       }
@@ -397,7 +428,6 @@ function App() {
 
      }
 
-     //console.log(size.With);
 
 
 
@@ -435,6 +465,7 @@ function App() {
                   <Login
                     // inProfile={inProfile}
                     hahdleSubmitLogin={hahdleSubmitLogin}
+                    errorMessage={errorMessage}
                   ></Login>
                 </>
               }
@@ -494,6 +525,9 @@ function App() {
                       loggedIn={loggedIn}
                     ></Header>
                     <Movies
+                    toggleCheckbox={toggleCheckbox}
+                    setToggleCheckbox={setToggleCheckbox}
+
                     dataButtonNext={dataButtonNext}
                     handleButtonNextMovies={handleButtonNextMovies}
                       setMessageForNotFound={setMessageForNotFound}
@@ -529,12 +563,16 @@ function App() {
                       loggedIn={loggedIn}
                     ></Header>
                     <SavedMovies
+                    setMessageForNotFound={setMessageForNotFound}
+                    messageForNotFound={messageForNotFound}
+                    handleinitialMovies={handleinitialMoviesInSavedMovies}
+                    dataButtonNext={dataButtonNext}
                       //hahdleDeleteInSadedMovies={hahdleDeleteInSadedMovies}
                       hahdleDeleteAndAddSadedMovies={
                         hahdleDeleteAndAddSadedMovies
                       }
-                      handleinitialMovies={handleinitialMovies}
-                      moviesSaved={moviesSaved}
+
+                      moviesSaved={moviesSavedData}
                       typeEditUiMenu={typeEditUiMenu}
                     ></SavedMovies>
                   </>

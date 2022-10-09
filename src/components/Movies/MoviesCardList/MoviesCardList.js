@@ -21,6 +21,8 @@ function handleButtonNext() {
   console.log(props.dataButtonNext.isVisible);
 }
 
+console.log(props.messageForNotFound)
+
   return (
     <div className="moviesCardList">
       {!props.isVisiblePreloader && (
@@ -40,7 +42,7 @@ function handleButtonNext() {
       )}
       {props.isVisiblePreloader && <Preloader></Preloader>}
       {props.messageForNotFound}
-        {props.dataButtonNext.isVisible && <button onClick={()=> handleButtonNext()} type="button" className="moviesCardList__button-next">
+        {props.dataButtonNext.isVisible && !isTypeSavedMoviesSite && <button onClick={()=> handleButtonNext()} type="button" className="moviesCardList__button-next">
           Еще
         </button>}
     </div>

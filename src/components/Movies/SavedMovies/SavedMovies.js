@@ -4,13 +4,17 @@ import "./SavedMovies.css";
 
 function SavedMovies(props) {
 
+
   return (
     <section className="movies">
       <div className="movies__container">
-        {/* <SearchForm
+        <SearchForm
+        setMessageForNotFound={props.setMessageForNotFound}
           handleinitialMovies={props.handleinitialMovies}
-        ></SearchForm> */}
+        ></SearchForm>
         <MoviesCardList
+        messageForNotFound={props.messageForNotFound}
+        dataButtonNext={props.dataButtonNext}
           moviesSaved={props.moviesSaved}
           typeEditUiMenu={props.typeEditUiMenu}
           hahdleDeleteAndAddSadedMovies={props.hahdleDeleteAndAddSadedMovies}

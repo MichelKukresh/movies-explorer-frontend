@@ -10,6 +10,7 @@
   display: flex;
   flex-direction: row;
   justify-content: space-between;
+  text-align: start;
 }
 
 .moviesCard__container-text {
@@ -52,6 +53,12 @@
   opacity: 0.8;
 }
 
+@media (max-width: 1000px) {
+  .moviesCard__name {
+    max-width: 236px;
+  }
+}
+
 @media (max-width: 800px) {
   .moviesCard {
     height: 257px;
@@ -61,5 +68,9 @@
 @media (max-width: 500px) {
   .moviesCard {
     height: 233px;
+  }
+
+  .moviesCard__name {
+    max-width: 213px;
   }
 }

@@ -33,7 +33,7 @@ function Header(props) {
     navigate("/sign-up");
   }
 
-  function handlButtonSignUp() {
+  function handlButtonAkkaunt() {
     navigate("/profile");
   }
 
@@ -63,7 +63,7 @@ function Header(props) {
                 Сохраненные фильмы
               </button>
             </div>
-            <button onClick={()=> handlButtonSignUp()} type="button" className={`header__buttom-akkaunt ${(props.type === "landing") && "header__buttom-akkaunt_landing"}`}>
+            <button onClick={()=> handlButtonAkkaunt()} type="button" className={`header__buttom-akkaunt ${(props.type === "landing") && "header__buttom-akkaunt_landing"}`}>
               <img src={icon} alt="иконка аккаунта" />{" "}
               <span className="header__buttom-akkaunt-title">Аккаунт</span>
             </button>

@@ -32,6 +32,9 @@ function Login(props) {
       password: refPassword.current.value,
     });
   }
+  console.log(props.errorMessage);
+
+    console.log(form.isVisibleSpanError);
 
 
 
@@ -48,7 +51,7 @@ function Login(props) {
         onChange={(e) => form.handleChange(e)}
         name="email"
         ref={refEmail}
-          type="text"
+          type="email"
           className="login__input-type"
           placeholder="pochta@yandex.ru"
           required
@@ -67,7 +70,7 @@ function Login(props) {
           placeholder="11111111"
           required
         ></input>
-        <span className="login__span-input login__span-input_validation">
+        <span className="login__span-input login__span-input_validation login__span-input_plase-on-button">
         {form.errors.password}
           {props.errorMessage &&
             !form.isVisibleSpanError &&

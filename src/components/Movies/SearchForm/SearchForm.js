@@ -4,9 +4,14 @@ import RadioButton from "../RadioButton/RadioButton";
 import { useRef, useState } from "react";
 import searchicon from "../../../images/searchicon.svg";
 import find from "../../../images/find.svg";
+import useFormWithValidation from "../../../utils/hooks";
 
 function SearchForm(props) {
-  const [toggle, setToggle] = useState(false);
+  //const [toggle, setToggle] = useState(false);
+  //toggleCheckbox={toggleCheckbox}
+  //setToggleCheckbox={setToggleCheckbox}
+
+  const form = useFormWithValidation();
 
   const searchInput = useRef(null);
 
@@ -21,6 +26,7 @@ function SearchForm(props) {
   }
 
   function resetMessageForNotFound(e) {
+    form.handleChange(e);
     props.setMessageForNotFound("");
   }
 
@@ -37,13 +43,19 @@ function SearchForm(props) {
           required
           onChange={(e) => resetMessageForNotFound(e)}
         />
-        <button type="submit" onClick={(e)=> handleSubmitButton(e)} className="searchForm__button-search">
+        <button
+        type="submit"
+        onClick={(e)=> handleSubmitButton(e)}
+        className="searchForm__button-search"
+        disabled={!form.isValid}
+        >
           <img src={find} alt="кнопка поиска" onClick={handleFocus} />
         </button>
       </form>
       <div className="searchForm__wrapper-changle-text">
         <RadioButton
-          onChange={(e) => setToggle(e.target.checked)}
+        toggle={props.toggleCheckbox}
+          onChange={(e) => props.setToggleCheckbox(e.target.checked)}
         ></RadioButton>
         <span>Короткометражки</span>
       </div>

@@ -46,10 +46,12 @@ function Profile(props) {
     });
   }
 
+  const isFormDataDifferentFromCurrent = form.values.email === currentUser.email && form.values.name === currentUser.name ? false : true ;
 
+  console.log(isFormDataDifferentFromCurrent);
 
+  console.log(isVisivleEdit);
 
-  // валидация
 
   return (
     <div className="profile">
@@ -70,7 +72,8 @@ function Profile(props) {
           className="profile__input-type"
           placeholder="Имя"
         ></input>
-        <span className="profile__span-input">{currentUser.email}</span>
+        <span className="profile__span-input profile__span-input_last">{currentUser.email}</span>
+        <span className="profile__span-input-validation">{form.errors.name}</span>
         <input
         onChange={(e) => form.handleChange(e)}
           ref={refEmail}
@@ -81,8 +84,9 @@ function Profile(props) {
           className="profile__input-type profile__input-type_border-none"
           placeholder="E-mail"
         ></input>
+        <span className="profile__span-input-validation profile__span-input-validation_long-margin">{form.errors.email}</span>
         {/* <span className="profile__span-input profile__span-input_validation">Валидация</span> */}
-        {!isVisivleEdit && (
+        {!isVisivleEdit &&  (
           <button
             type="button"
             className="profile__submit-button"
@@ -91,7 +95,7 @@ function Profile(props) {
             Редактировать
           </button>
         )}
-        {isVisivleEdit && <ButtonSubmit  isDisableStatus={form.isValid} onClick={(e)=>submitEdit(e)} type="submit" title="Сохранить" />}
+        {isVisivleEdit &&  <ButtonSubmit  isDisableStatus={form.isValid && isFormDataDifferentFromCurrent} onClick={(e)=>submitEdit(e)} type="submit" title="Сохранить" />}
       </form>
       <div className="profile__wrapper-is-profile">
         {!isVisivleEdit && (

@@ -25,12 +25,15 @@ function MoviesCard(props) {
     props.hahdleDeleteAndAddSadedMovies(props);
   };
 
+  const minutes = (props.item.duration % 60);
+  const hour = (Math.floor(props.item.duration / 60));
+
   return (
     <li className="moviesCard">
       <div className="moviesCard__container-text-button">
         <div className="moviesCard__container-text">
           <h3 className="moviesCard__name">{props.item.nameRU}</h3>
-          <h3 className="moviesCard__time">{props.item.duration}</h3>
+          <h3 className="moviesCard__time">{hour ? `${hour}ч `: "" }{minutes ? `${minutes}м`: ""}</h3>
         </div>
         <button
           type="button"
