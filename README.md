@@ -10,7 +10,7 @@
 
 ###### ссылка на макет [Figma](https://www.figma.com/file/Ty5BCeoGGS7WWawFwQL6rz/Diploma-(Copy)?node-id=891%3A3857)
 
-###### ссылка на [пул реквест]() 
+###### ссылка на [пул реквест](https://github.com/MichelKukresh/movies-explorer-frontend/pull/3) 
 
 ## планируется: 
 - [ ] приведение функционала к заданию
