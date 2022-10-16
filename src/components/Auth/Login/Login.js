@@ -32,9 +32,9 @@ function Login(props) {
       password: refPassword.current.value,
     });
   }
-  console.log(props.errorMessage);
+  //console.log(props.errorMessage);
 
-    console.log(form.isVisibleSpanError);
+    //console.log(form.isVisibleSpanError);
 
 
 

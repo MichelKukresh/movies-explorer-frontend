@@ -24,23 +24,35 @@ function Menu(props) {
     <div className={`menu ${props.isOpen && "menu_is-open"}`}>
       <div className="menu__content">
         {/* <img src={close}></img> */}
-        <button type="button"
+        <button
+          type="button"
           className="menu__close"
           onClick={() => props.setOpen(false)}
         ></button>
         <button
-          onClick={(e)=> handlButtonToMaini(e)}
+          onClick={(e) => handlButtonToMaini(e)}
           type="button"
-          className={`menu__navigation ${(props.typeEditUiMenu === "main") && "menu__navigation_activ"}`}
-          >Главная</button>
-        <button type="button"
-          className={`menu__navigation ${(props.typeEditUiMenu === "movies") && "menu__navigation_activ"}`}
+          className={`menu__navigation ${
+            props.typeEditUiMenu === "movies-explorer-frontend" &&
+            "menu__navigation_activ"
+          }`}
+        >
+          Главная
+        </button>
+        <button
+          type="button"
+          className={`menu__navigation ${
+            props.typeEditUiMenu === "movies" && "menu__navigation_activ"
+          }`}
           onClick={(e) => handlButtonToMovies(e)}
         >
           Фильмы
         </button>
-        <button type="button"
-          className={`menu__navigation ${(props.typeEditUiMenu === "saved-movies") && "menu__navigation_activ"}`}
+        <button
+          type="button"
+          className={`menu__navigation ${
+            props.typeEditUiMenu === "saved-movies" && "menu__navigation_activ"
+          }`}
           onClick={(e) => handlButtonToSavedMovies(e)}
         >
           Сохраненные фильмы

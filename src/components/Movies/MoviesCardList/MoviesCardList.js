@@ -17,11 +17,11 @@ function MoviesCardList(props) {
 
 function handleButtonNext() {
   props.handleButtonNextMovies();
-  console.log("пока не работае кнопка");
-  console.log(props.dataButtonNext.isVisible);
+ // console.log("пока не работае кнопка");
+  //console.log(props.dataButtonNext.isVisible);
 }
 
-console.log(props.messageForNotFound)
+//console.log(props.messageForNotFound)
 
   return (
     <div className="moviesCardList">

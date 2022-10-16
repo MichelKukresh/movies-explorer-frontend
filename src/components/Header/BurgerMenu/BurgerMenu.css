@@ -10,7 +10,7 @@
   height: 38px;
 }
 
-@media (max-width: 800px) {
+@media (max-width: 768px) {
   .burgerMenu {
     display: block;
   }

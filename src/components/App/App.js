@@ -19,6 +19,7 @@ import { api } from "../../utils/MainApi";
 import { moviesApi } from "../../utils/MoviesApi";
 import { MOVE_URL } from "../../utils/initialCards";
 import ScreenSize from "../../utils/hooksScreenSize";
+import ErrorNotFoun from "../ErrorNotFoun/ErrorNotFoun";
 
 function App() {
   const navigate = useNavigate();
@@ -33,16 +34,31 @@ function App() {
   const [movies, setMovies] = useState([]);
   const [moviesSavedData, setMoviesSavedData] = useState([]); // для отрисовки данных на странице, в том числе и для манипуляций с поиском
   const [moviesSaved, setMoviesSaved] = useState([]); // для хранения данных сохраненных с сервера
-  // const [moviesOllOnApi, setMoviesOllOnApi] = useState([]);
+
   const [isVisiblePreloader, setVisiblePreloader] = useState(false);
   const [messageForNotFound, setMessageForNotFound] = useState("");
 
-  // модуль отображения количесва фильмов в зависимости от разрешения
-  const [columnAndRow, srtColumnAndRow] = useState({column: 0, row: 0, card: 0});
-  const [changeableArrayDependingScreenSize, setChangeableArrayDependingScreenSize] = useState([]); // массив карточек который идет на отрисовку в зависимости от экрана
-  const [dataButtonNext, setDataButtonNext] = useState({isVisible: false, howMuchAddmovies: 0});
+  const [isVisibleErrorNotFound, setVisibleErrorNotFound] = useState(false);
 
-  const [toggleCheckbox, setToggleCheckbox] = useState(false);
+  // модуль отображения количесва фильмов в зависимости от разрешения
+  const [columnAndRow, srtColumnAndRow] = useState({
+    column: 0,
+    row: 0,
+    card: 0,
+  });
+  const [
+    changeableArrayDependingScreenSize,
+    setChangeableArrayDependingScreenSize,
+  ] = useState([]); // массив карточек который идет на отрисовку в зависимости от экрана
+  const [dataButtonNext, setDataButtonNext] = useState({
+    isVisible: false,
+    howMuchAddmovies: 0,
+  });
+
+  const [toggleCheckbox, setToggleCheckbox] = useState({
+    placeMovie: false,
+    plaseSavedMovies: false,
+  });
 
   //хранение данных при регистрации
   const [userDaraRegister, setUserDaraRegister] = useState({
@@ -52,15 +68,8 @@ function App() {
 
   useEffect(() => {
     tokenCheck();
-    setEditUiMenu("/main");
+    setEditUiMenu("movies-explorer-frontend");
   }, []);
-
-  // useEffect(()=> {
-
-  //   if(moviesOllOnApi) {
-  //     setMovies([moviesOllOnApi, ...movies]);
-  //   }
-  // }, [moviesSaved])
 
   useEffect(() => {
     api.getTwtForNewApi(localStorage.getItem("jwt"));
@@ -70,45 +79,21 @@ function App() {
         api.getInitialUser().then((data) => {
           setCurrentUser(data);
         }),
-
         api.getInitialMovies().then((data) => setMoviesSaved(data.data)),
-        //.then((data) => console.log(moviesSaved)),
-        // api.getInitialCards().then((data) => {
-        //   setCards(
-        //     data.data.map((item) => ({
-        //       name: item.name,
-        //       link: item.link,
-        //       likes: item.likes, //массив из лайкнувших
-        //       owner: item.owner, //для проверки кто создал карточку\вешать корзину?
-        //       _id: item._id, //id самой карточки
-        //     }))
-        //   );
-        // }),
       ]).catch((err) => {
+        setVisibleErrorNotFound(true);
         console.log(err);
       });
     }
   }, [loggedIn]);
 
-  // const tokenCheck = () => {
-  //   navigate("/movies-explorer-frontend");
-  // };
-
   const tokenCheck = () => {
     let jwt = localStorage.getItem("jwt");
     if (jwt) {
-      getJWT(jwt)
-        // .then((data) => {
-        // устанавливаем данные о пользователе при логировании
-        // setUserDaraRegister({
-        //   email: data.email,
-        //   password: "",
-        // });
-        // })
-        .then(() => {
-          setLoggedIn(true);
-          navigate("/movies-explorer-frontend");
-        });
+      getJWT(jwt).then(() => {
+        setLoggedIn(true);
+        navigate("/movies-explorer-frontend");
+      });
     } else {
       navigate("/movies-explorer-frontend");
     }
@@ -123,13 +108,7 @@ function App() {
     navigate("/saved-movies");
     setEditNavigationMenuOpen(false);
     setMoviesSavedData(moviesSaved);
-
-
   }
-
-  // function inProfile() {
-  //   navigate("/profile");
-  // }
 
   function inMain() {
     navigate("/movies-explorer-frontend");
@@ -142,22 +121,15 @@ function App() {
     register(dataRegister)
       .then((data) => {
         hahdleSubmitLogin(dataRegister);
-
-        // setSuccessfulRegistration(true);
-        // setEditRegisterPopupPopupOpen(true);
-        // navigate("/sign-in");
       })
       .catch((err) => {
         console.log(err);
         setErrorMesage(err);
-        // setSuccessfulRegistration(false);
-        // setEditRegisterPopupPopupOpen(true);
       });
   };
 
   //обработка логина
   const hahdleSubmitLogin = (dataRegister) => {
-    // e.preventDefault();
     setErrorMesage("");
 
     login(dataRegister)
@@ -172,8 +144,6 @@ function App() {
       .catch((err) => {
         console.log(err);
         setErrorMesage(err);
-        //setSuccessfulRegistration(false);
-        //setEditRegisterPopupPopupOpen(true);
       });
   };
 
@@ -189,20 +159,17 @@ function App() {
   };
 
   function handleUpdateUser({ name, email }) {
-    // setButtonInfomationAboutSave("Сохранение...");
     api
       .patchUserInfoNameAbout(name, email)
       .then((data) => {
         setCurrentUser(data);
-        // closeAllPopups();
       })
       .catch((err) => {
+        setVisibleErrorNotFound(true);
         console.log(err);
       });
     // .finally(() => setButtonInfomationAboutSave("Сохранить"));
   }
-
-  ////////////////////////////////////////
 
   function handleinitialMovies(search) {
     setMessageForNotFound("");
@@ -211,19 +178,19 @@ function App() {
     moviesApi
       .getInitialMovies()
       .then((data) => {
-        // closeAllPopups();
         const re = new RegExp(`${search}`, "i");
         const foundMoviesID = data
           .map((e) => String(Object.values(e)).match(re) != null && e)
           .filter((e) => e !== false);
 
-          const folterShortMovie = !toggleCheckbox ? foundMoviesID : foundMoviesID.filter((e) => e.duration <= 40 ) ;
-          console.log(folterShortMovie);
+        const folterShortMovie = !toggleCheckbox.placeMovie
+          ? foundMoviesID
+          : foundMoviesID.filter((e) => e.duration <= 40);
+        console.log(folterShortMovie);
         // setMoviesOllOnApi(foundMoviesID);
         const checkMessageForNotFound =
           foundMoviesID.length === 0 ? "Ничего не найдено" : "";
         setMessageForNotFound(checkMessageForNotFound);
-
 
         return folterShortMovie;
 
@@ -244,34 +211,26 @@ function App() {
       .finally(() => setVisiblePreloader(false));
   }
 
-  //////////////////////////////////////////// поиск среди сохраненных фильмов
+  // поиск среди сохраненных фильмов
   function handleinitialMoviesInSavedMovies(searchInSavedMovies) {
     const re = new RegExp(`${searchInSavedMovies}`, "i");
-        const foundMoviesID = moviesSaved
-          .map((e) => String(Object.values(e)).match(re) != null && e)
-          .filter((e) => e !== false);
+    const foundMoviesID = moviesSaved
+      .map((e) => String(Object.values(e)).match(re) != null && e)
+      .filter((e) => e !== false);
 
-          const folterShortMovie = !toggleCheckbox ? foundMoviesID : foundMoviesID.filter((e) => e.duration <= 40 ) ;
-          console.log(folterShortMovie);
-          setMoviesSavedData(folterShortMovie);
-        // setMoviesOllOnApi(foundMoviesID);
-        const checkMessageForNotFound =
-          foundMoviesID.length === 0 ? "Ничего не найдено" : "";
-        setMessageForNotFound(checkMessageForNotFound);
+    const folterShortMovie = !toggleCheckbox.plaseSavedMovies
+      ? foundMoviesID
+      : foundMoviesID.filter((e) => e.duration <= 40);
 
-        //   const [moviesSavedData, setMoviesSavedData] = useState([]); // для отрисовки данных на странице, в том числе и для манипуляций с поиском
-  // const [moviesSaved, setMoviesSaved] = useState([]); // для хранения данных сохраненных с сервера
+    setMoviesSavedData(folterShortMovie);
 
-       // return folterShortMovie;
-
-
-
+    const checkMessageForNotFound =
+      foundMoviesID.length === 0 ? "Ничего не найдено" : "";
+    setMessageForNotFound(checkMessageForNotFound);
   }
 
   // добавление фильма в сохраненные
   function hahdleAddInSadedMovies(item) {
-    console.log(item);
-    console.log(movies);
     api
       .savededMovies(item)
       .then((newItem) => {
@@ -290,42 +249,47 @@ function App() {
           nameRU: newItem.data.nameRU,
           trailerLink: newItem.data.trailerLink,
 
-          // thumbnail: `${MOVE_URL}${data.item.image.formats.thumbnail.url}`,
           year: newItem.data.year,
         };
-
-        //console.log(newItem);
 
         return nm;
       })
       .then((nm) => {
-        //setMovies((movies) =>
-          //movies.map((c) => (c.id === item.movieId ? nm : c))
-          setChangeableArrayDependingScreenSize((changeableArrayDependingScreenSize) =>
-          changeableArrayDependingScreenSize.map((c) => (c.id === item.movieId ? nm : c))
+        setChangeableArrayDependingScreenSize(
+          (changeableArrayDependingScreenSize) =>
+            changeableArrayDependingScreenSize.map((c) =>
+              c.id === item.movieId ? nm : c
+            )
         );
+      })
+      .catch((err) => {
+        setVisibleErrorNotFound(true);
+        console.log(err);
       });
   }
 
-  // .then((newCard) => {
-  //   setCards((cards) =>
-  //     cards.map((c) => (c._id === card._id ? newCard.data : c))
-  //   );
-  // })
-
   // удаление из сохраненных
   function hahdleDeleteInSadedMovies(id) {
-    api.deleteMovie(id).then((newItem) => {
-      setMoviesSaved((moviesSaved) =>
-        moviesSaved.filter((c) => (c._id !== newItem.data._id ? c : null))
-      );
-    });
+    api
+      .deleteMovie(id)
+      .then((newItem) => {
+        setMoviesSaved((moviesSaved) =>
+          moviesSaved.filter((c) => (c._id !== newItem.data._id ? c : null))
+        );
+
+        setMoviesSavedData((moviesSavedData) =>
+          moviesSavedData.filter((c) => (c._id !== newItem.data._id ? c : null))
+        );
+      })
+      .catch((err) => {
+        setVisibleErrorNotFound(true);
+        console.log(err);
+      });
   }
 
   // принятие решения удалить или сохранить и сформировать объект
 
   function hahdleDeleteAndAddSadedMovies(data) {
-
     switch (data.typeEditUiMenu) {
       case "movies":
         const isSaved = data.moviesSaved.find(
@@ -354,84 +318,53 @@ function App() {
         hahdleDeleteInSadedMovies(data.item._id);
         break;
       default:
-        console.log("Тип не определен");
+        //console.log("Тип не определен");
         break;
     }
   }
 
-  // модуль отображения количесва фильмов в зависимости от разрешения, расчитывает сколько добавлять и сколько осталось
-      //определяем изначальный массив с ним и будем сравнивать всегда
-
-
-      //const [columnAndRow, srtColumnAndRow] = useState({column: 0, row: 0, card: 0})
-      //const [changeableArrayDependingScreenSize, setChangeableArrayDependingScreenSize] = useState([]);
-      //const [dataButtonNext, setDataButtonNext] = useState({isVisible: false, howMuchAddmovies: 0});
-
-
   const size = ScreenSize();
-  //const maxWithScrin = 1280;
   const middleWithScrin = 1272;
   const minWithScrin = 480;
 
+  useEffect(() => {
+    if (size.With < minWithScrin) {
+      srtColumnAndRow({ column: 1, row: 5, card: 5, add: 2 });
+    } else if (size.With < middleWithScrin) {
+      srtColumnAndRow({ column: 2, row: 8, card: 16, add: 2 });
+    } else {
+      srtColumnAndRow({ column: 3, row: 3, card: 12, add: 3 });
+    }
 
-      useEffect(()=> {
-       if (size.With < minWithScrin) {
-         srtColumnAndRow({column: 1, row: 5, card: 5, add: 2})
-       } else if (size.With < middleWithScrin ) {
-         srtColumnAndRow({column: 2, row: 8, card: 16, add: 2})
-       } else {
-         srtColumnAndRow({column: 3, row: 3, card: 12, add: 3})
-       }
+    changeableArray();
+  }, [size.With, movies]);
 
-       changeableArray ();
+  // шинкует массив ( сколько было отрисовано по экрану? сколько нужно открывать при нажатии на еще?)
+  function changeableArray() {
+    const changeableArrayFromRender = movies.slice(0, columnAndRow.card);
+    setChangeableArrayDependingScreenSize(changeableArrayFromRender);
 
-      //
-      //  setChangeableDependingScreenSize(changeableArray);
+    const isVisibleNext =
+      changeableArrayFromRender.length >= movies.length ? false : true;
 
-      }, [size.With, movies])
+    setDataButtonNext({ isVisible: isVisibleNext });
+  }
 
-      // шинкует массив ( сколько было отрисовано по экрану? сколько нужно открывать при нажатии на еще?)
-      function changeableArray () {
+  function handleButtonNextMovies() {
+    setChangeableArrayDependingScreenSize(
+      movies.slice(
+        0,
+        changeableArrayDependingScreenSize.length + columnAndRow.add
+      )
+    );
 
-        const changeableArrayFromRender = movies.slice(0, (columnAndRow.card) );
-        setChangeableArrayDependingScreenSize(changeableArrayFromRender);
-
-        const isVisibleNext = changeableArrayFromRender.length >= movies.length ? false : true;
-
-        setDataButtonNext({isVisible: isVisibleNext});
-
-
-
-      }
-
-      function handleButtonNextMovies() {
-
-     //const arr = changeableArrayDependingScreenSize.length + columnAndRow.add;
-     console.log(changeableArrayDependingScreenSize);
-     setChangeableArrayDependingScreenSize( movies.slice(0, (changeableArrayDependingScreenSize.length + columnAndRow.add)));
-
-     const isVisibleNext = (changeableArrayDependingScreenSize.length + columnAndRow.add) >= movies.length ? false : true;
-     console.log(changeableArrayDependingScreenSize);
-     console.log(changeableArrayDependingScreenSize.length);
-     console.log(movies.length);
-        setDataButtonNext({isVisible: isVisibleNext});
-        console.log(dataButtonNext.isVisible);
-
-
-
-         // первоначально загружает нужно количесво карточек и меняет
-
-         //setChangeableArrayDependingScreenSize(changeableArray);
-
-         //console.log("кнопка еще пока не работает");
-         //console.log(changeableArray);
-
-     }
-
-
-
-
-
+    const isVisibleNext =
+      changeableArrayDependingScreenSize.length + columnAndRow.add >=
+      movies.length
+        ? false
+        : true;
+    setDataButtonNext({ isVisible: isVisibleNext });
+  }
 
   return (
     <CurrentUserContext.Provider value={currentUser}>
@@ -525,11 +458,10 @@ function App() {
                       loggedIn={loggedIn}
                     ></Header>
                     <Movies
-                    toggleCheckbox={toggleCheckbox}
-                    setToggleCheckbox={setToggleCheckbox}
-
-                    dataButtonNext={dataButtonNext}
-                    handleButtonNextMovies={handleButtonNextMovies}
+                      toggleCheckbox={toggleCheckbox}
+                      setToggleCheckbox={setToggleCheckbox}
+                      dataButtonNext={dataButtonNext}
+                      handleButtonNextMovies={handleButtonNextMovies}
                       setMessageForNotFound={setMessageForNotFound}
                       messageForNotFound={messageForNotFound}
                       isVisiblePreloader={isVisiblePreloader}
@@ -563,18 +495,20 @@ function App() {
                       loggedIn={loggedIn}
                     ></Header>
                     <SavedMovies
-                    setMessageForNotFound={setMessageForNotFound}
-                    messageForNotFound={messageForNotFound}
-                    handleinitialMovies={handleinitialMoviesInSavedMovies}
-                    dataButtonNext={dataButtonNext}
+                      toggleCheckbox={toggleCheckbox}
+                      setToggleCheckbox={setToggleCheckbox}
+                      setMessageForNotFound={setMessageForNotFound}
+                      messageForNotFound={messageForNotFound}
+                      handleinitialMovies={handleinitialMoviesInSavedMovies}
+                      dataButtonNext={dataButtonNext}
                       //hahdleDeleteInSadedMovies={hahdleDeleteInSadedMovies}
                       hahdleDeleteAndAddSadedMovies={
                         hahdleDeleteAndAddSadedMovies
                       }
-
                       moviesSaved={moviesSavedData}
                       typeEditUiMenu={typeEditUiMenu}
                     ></SavedMovies>
+                    <Footer></Footer>
                   </>
                 </ProtectedRoute>
               }
@@ -589,6 +523,10 @@ function App() {
             setEditUiMenu={setEditUiMenu}
             typeEditUiMenu={typeEditUiMenu}
           ></Menu>
+          <ErrorNotFoun
+            setVisibleErrorNotFound={setVisibleErrorNotFound}
+            isVisibleErrorNotFound={isVisibleErrorNotFound}
+          ></ErrorNotFoun>
         </div>
       </div>
     </CurrentUserContext.Provider>

@@ -9,6 +9,9 @@ function SavedMovies(props) {
     <section className="movies">
       <div className="movies__container">
         <SearchForm
+        typeEditUiMenu={props.typeEditUiMenu}
+        toggleCheckbox={props.toggleCheckbox}
+        setToggleCheckbox={props.setToggleCheckbox}
         setMessageForNotFound={props.setMessageForNotFound}
           handleinitialMovies={props.handleinitialMovies}
         ></SearchForm>

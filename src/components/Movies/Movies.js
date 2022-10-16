@@ -8,6 +8,7 @@ function Movies(props) {
     <section className="movies">
       <div className="movies__container">
         <SearchForm
+        typeEditUiMenu={props.typeEditUiMenu}
         toggleCheckbox={props.toggleCheckbox}
         setToggleCheckbox={props.setToggleCheckbox}
           handleinitialMovies={props.handleinitialMovies}

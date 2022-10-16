@@ -32,10 +32,10 @@ function Profile(props) {
 
 
   function submitEdit(e) {
-    console.log({
-        email: refEmail.current.value,
-        name: refName.current.value,
-      });
+    // console.log({
+    //     email: refEmail.current.value,
+    //     name: refName.current.value,
+    //   });
 
     // e.preventDefault();
     setVisibleElit(false);
@@ -48,9 +48,9 @@ function Profile(props) {
 
   const isFormDataDifferentFromCurrent = form.values.email === currentUser.email && form.values.name === currentUser.name ? false : true ;
 
-  console.log(isFormDataDifferentFromCurrent);
+  //console.log(isFormDataDifferentFromCurrent);
 
-  console.log(isVisivleEdit);
+ // console.log(isVisivleEdit);
 
 
   return (

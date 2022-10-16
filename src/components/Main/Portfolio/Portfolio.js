@@ -32,7 +32,7 @@ function Portfolio() {
             <a
               target="blank"
               className="portfolio__link"
-              href="https://michelkukresh.github.io/russian-travel/index.html"
+              href="https://michelkukresh.github.io/how-to-learn/index.html"
             >
               Статичный сайт
             <img alt="стрелка" src={arrow} />
@@ -42,7 +42,7 @@ function Portfolio() {
             <a
               target="blank"
               className="portfolio__link"
-              href="https://michelkukresh.github.io/mesto/index.html"
+              href="https://michelkukresh.github.io/russian-travel/index.html"
             >
               Адаптивный сайт
             <img alt="стрелка" src={arrow} />
@@ -53,6 +53,7 @@ function Portfolio() {
               target="blank"
               className="portfolio__link"
               href="https://kukreshma.students.nomoredomains.sbs"
+              //href="https://michelkukresh.github.io/mesto/index.html"
             >
               Одностраничное приложение
             <img alt="стрелка" src={arrow} />
