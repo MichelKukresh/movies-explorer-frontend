@@ -647,6 +647,18 @@ function App() {
                 </ProtectedRoute>
               }
             />
+            <Route
+            path="*" element={
+            <ErrorNotFoun
+              setVisibleErrorNotFound={setVisibleErrorNotFound}
+              isVisibleErrorNotFound={isVisibleErrorNotFound}
+              badRoute={true}
+            ></ErrorNotFoun>}
+
+
+
+
+            />
           </Routes>
           <Menu
             isOpen={isEditNavigationMenuOpen}
