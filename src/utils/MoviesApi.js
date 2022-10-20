@@ -12,8 +12,23 @@ class MoviesApi {
     return Promise.reject(`Ошибка: ${res.status}`);
   };
 
+  getInitialMoviesFrombeatfilmMovies() {
+    return "ssss";
+    //const beatfilmMoviesOllMuvies = JSON.parse(localStorage.getItem("beatfilmMoviesOllMuvies"));
+   // if(beatfilmMoviesOllMuvies) {
+      //return beatfilmMoviesOllMuvies;
+    // } else {
+    //   this.getInitialMovies().then((data)=> {
+    //     localStorage.setItem("beatfilmMoviesOllMuvies", JSON.stringify(data));
+    //     return data;
+    //   });
+    //}
+  }
+
   //получаем данные карточек для дальнейшей вставки
   getInitialMovies() {
+    console.log("Запрашиваю все фильмы с beatfilm-movies");
+
     return fetch(this._baseUrl, {
       method: "GET",
       headers: this._headers,

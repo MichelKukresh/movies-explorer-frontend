@@ -1,7 +1,11 @@
 import "./Menu.css";
 import icon from "../../images/icon__COLOR_icon-main.svg";
+import { useNavigate } from "react-router-dom";
 
 function Menu(props) {
+
+  const navigate = useNavigate();
+
   function handlButtonToMovies(e) {
     e.preventDefault();
     props.inMovies();
@@ -18,6 +22,11 @@ function Menu(props) {
     e.preventDefault();
     props.inMain();
     props.setEditUiMenu("movies-explorer-frontend");
+  }
+
+  function handlButtonAkkaunt() {
+    navigate("/profile");
+    props.setEditNavigationMenuOpen(false);
   }
 
   return (
@@ -57,7 +66,7 @@ function Menu(props) {
         >
           Сохраненные фильмы
         </button>
-        <button type="button" className="menu__buttom-akkaunt">
+        <button type="button" className="menu__buttom-akkaunt" onClick={()=> handlButtonAkkaunt()}>
           <img src={icon} alt="иконка аккаунта" />{" "}
           <span className="menu__buttom-akkaunt-title">Аккаунт</span>
         </button>

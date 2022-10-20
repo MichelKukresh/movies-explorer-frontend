@@ -67,7 +67,7 @@ function Login(props) {
           ref={refPassword}
           type="password"
           className="login__input-type"
-          placeholder="11111111"
+          placeholder="*******"
           required
         ></input>
         <span className="login__span-input login__span-input_validation login__span-input_plase-on-button">

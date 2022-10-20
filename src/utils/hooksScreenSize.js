@@ -17,10 +17,6 @@ export default function ScreenSize() {
 
   };
 
-
-
-
-
   useEffect(() => {
     window.addEventListener("resize", detectSize);
 

@@ -2,25 +2,26 @@ import "./MoviesCard.css";
 /// import cardImg from "../../../images/MoviesCard.png";
 import noSave from "../../../images/save9d.svg";
 import save from "../../../images/save9.svg";
+import del from "../../../images/d9.svg";
 import { MOVE_URL } from "../../../utils/initialCards";
 
 function MoviesCard(props) {
   // определяем страницу где будут загружаться карточки (сохраненные или нет)
   const isTypeSavedMoviesSite = props.typeEditUiMenu === "saved-movies";
   // const isTypeMoviesSite = props.typeEditUiMenu === "movies";
+  //console.log(props);
 
   let isSaved;
   let linkImages;
   if (isTypeSavedMoviesSite) {
-    // определяем как загружать карточки (из за разници api карточки формируются по разному))
-    isSaved = true;
+    // определяем как загружать карточки (из за разницы api карточки формируются по разному)
+    isSaved = del;
     linkImages = props.item.image;
   } else {
-    isSaved = props.moviesSaved.find((i) => i.movieId === props.item.id);
+    isSaved = props.moviesSaved.find((i) => i.movieId === props.item.id) ? save : noSave;
     linkImages = `${MOVE_URL}${props.item.image.url}`;
   }
 
-  const moviesSavedButtonImages = isSaved ? save : noSave;
   const hahdleSavedMoviesButton = () => {
     props.hahdleDeleteAndAddSadedMovies(props);
   };
@@ -40,14 +41,16 @@ function MoviesCard(props) {
           onClick={() => hahdleSavedMoviesButton()}
           className="moviesCard__button"
         >
-          <img src={moviesSavedButtonImages} alt="сохранена"></img>
+          <img src={isSaved} alt="сохранена"></img>
         </button>
       </div>
+      <a href={props.item.trailerLink} target="blank" >
       <img
         className="moviesCard__img"
         src={linkImages}
         alt="картинка фильма"
       ></img>
+      </a>
     </li>
   );
 }

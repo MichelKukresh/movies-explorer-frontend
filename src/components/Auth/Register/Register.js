@@ -78,7 +78,7 @@ function Register(props) {
           name="password"
           type="password"
           className="register__input-type"
-          placeholder="11111111"
+          placeholder="*******"
           required
         ></input>
         <span className="register__span-input register__span-input_validation register__span-input_plase-on-button">

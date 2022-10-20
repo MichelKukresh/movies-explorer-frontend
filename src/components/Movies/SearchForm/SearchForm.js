@@ -1,38 +1,57 @@
 import "./SearchForm.css";
 
 import RadioButton from "../RadioButton/RadioButton";
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import searchicon from "../../../images/searchicon.svg";
 import find from "../../../images/find.svg";
 import useFormWithValidation from "../../../utils/hooks";
 
 function SearchForm(props) {
-  //const [toggleValueInWiev, setToggleValueInWiev] = useState(false);
-  //toggleCheckbox={toggleCheckbox}
-  //setToggleCheckbox={setToggleCheckbox}
-  //console.log(props);
-
-  const isTypeSavedMoviesSite = props.typeEditUiMenu === "saved-movies";
-  // const isTypeMoviesSite = props.typeEditUiMenu === "movies";
-
-  const toggleValue = isTypeSavedMoviesSite ? props.toggleCheckbox.plaseSavedMovies : props.toggleCheckbox.placeMovie;
-
-  // if(isTypeSavedMoviesSite) {
-  //   setToggleValueInWiev(props.toggleCheckbox.plaseSavedMovies);
-
-  // } else {
-  //   setToggleValueInWiev(props.toggleCheckbox.placeMovie);
-
-  // }
 
 
-  // const moviesArrForRender = isTypeSavedMoviesSite
-  //   ? placeMovie;
-  //   : plaseSavedMovies;
-
-  const form = useFormWithValidation();
 
   const searchInput = useRef(null);
+  const [
+    isCheckValidityOnDataFromLocalStorage,
+    setCheckValidityOnDataFromLocalStorage,
+  ] = useState(true);
+
+  useEffect(() => {
+    console.log(props.typeEditUiMenu);
+      if(isTypeSavedMoviesSite) {
+      searchInput.current.value = "";
+    } else {
+      searchInput.current.value = localStorage.getItem("search");
+    }
+    setCheckValidityOnDataFromLocalStorage(searchInput.current.validity.valid);
+
+  }, []);
+
+
+
+  const isTypeSavedMoviesSite = props.typeEditUiMenu === "saved-movies";
+
+  const toggleValue = isTypeSavedMoviesSite
+    ? props.toggleCheckbox.plaseSavedMovies
+    : props.toggleCheckbox.placeMovie;
+
+
+
+    // if(isTypeSavedMoviesSite) {
+    //   searchInput.current.value = "";
+
+
+
+    // } else {
+    //   //console.log(`вот информация вставить ${localStorage.getItem("search")}`);
+    //   //searchInput.current.value = localStorage.getItem("search");
+
+    //   searchInput.current.value = localStorage.getItem("search");
+
+    // }
+
+
+  const form = useFormWithValidation();
 
   function handleFocus() {
     searchInput.current.focus();
@@ -46,6 +65,8 @@ function SearchForm(props) {
   function resetMessageForNotFound(e) {
     form.handleChange(e);
     props.setMessageForNotFound("");
+    setCheckValidityOnDataFromLocalStorage(false);
+    //setCheckValidityOnDataFromLocalStorage(!form.isValid);
   }
 
   function handleCheckBox(e) {
@@ -54,8 +75,10 @@ function SearchForm(props) {
     } else {
       props.setToggleCheckbox({ placeMovie: e.target.checked });
     }
-
   }
+  const isDisabledButtonSubmit = isCheckValidityOnDataFromLocalStorage
+    ? isCheckValidityOnDataFromLocalStorage
+    : form.isValid;
 
   return (
     <>
@@ -74,7 +97,7 @@ function SearchForm(props) {
           type="submit"
           onClick={(e) => handleSubmitButton(e)}
           className="searchForm__button-search"
-          disabled={!form.isValid}
+          disabled={!isDisabledButtonSubmit}
         >
           <img src={find} alt="кнопка поиска" onClick={handleFocus} />
         </button>

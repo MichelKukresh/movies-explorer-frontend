@@ -70,6 +70,10 @@
   margin-bottom: 170px;
 }
 
+.profile__span-input-validation_no-error {
+  color: #3456f3;
+}
+
 .profile__submit-button {
   height: 45px;
   width: 100%;
@@ -162,7 +166,7 @@
   }
 
   .profile__submit-button {
-    margin-top: 297px;
+    margin-top: 67px;
   }
 
   .profile__submit-button {
@@ -175,7 +179,7 @@
     line-height: 15px;
   }
 
-  .profile__input-type_border-none {
+  /* .profile__input-type_border-none {
     margin-bottom: 52px;
-  }
+  } */
 }

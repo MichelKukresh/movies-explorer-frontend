@@ -101,6 +101,8 @@ class MainApi {
 
     //получаем данные карточек для дальнейшей вставки
     getInitialMovies() {
+      console.log("Запрашиваю все сохраненные фильмы");
+
       return fetch(`${this._baseUrl}movies`, {
         method: "GET",
         headers: this._headers,
