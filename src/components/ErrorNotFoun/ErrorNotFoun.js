@@ -3,6 +3,7 @@ import "./ErrorNotFoun.css";
 
 function ErrorNotFoun(props) {
   const navigate = useNavigate();
+  console.log(props.badRoute);
   function handleButtonBack() {
     props.setVisibleErrorNotFound(false);
     if(props.badRoute) {

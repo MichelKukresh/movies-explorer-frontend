@@ -20,6 +20,7 @@ import { moviesApi } from "../../utils/MoviesApi";
 import { MOVE_URL } from "../../utils/initialCards";
 import ScreenSize from "../../utils/hooksScreenSize";
 import ErrorNotFoun from "../ErrorNotFoun/ErrorNotFoun";
+import ProtectedRouteLoginAndRegister from "../Auth/ProtectedRouteLoginAndRegister/ProtectedRouteLoginAndRegister";
 
 function App() {
   const navigate = useNavigate();
@@ -104,8 +105,7 @@ function App() {
     if (jwt) {
       getJWT(jwt).then((data) => {
         setLoggedIn(true);
-        console.log(data);
-        console.log("jwt");
+
 
         //setMoviesSavedData(moviesSaved)
 
@@ -123,15 +123,17 @@ function App() {
       .catch((err) => {
         console.log(err);
         navigate("/movies-explorer-frontend");
-        localStorage.removeItem("foundMovies");
-        localStorage.removeItem("toggleCheckbox");
-        localStorage.removeItem("search");
-        localStorage.removeItem("jwt");
+        // localStorage.removeItem("foundMovies");
+        // localStorage.removeItem("toggleCheckbox");
+        // localStorage.removeItem("search");
+        // localStorage.removeItem("jwt");
+        // localStorage.removeItem("beatfilmMoviesOllMuvies");
+        localStorage.clear();
         //// добавить очистку списка фильмов с beatifui
         setLoggedIn(false);
       });
     } else {
-      navigate("/movies-explorer-frontend");
+      navigate(location.pathname);
     }
   };
 
@@ -148,14 +150,10 @@ function App() {
     // //setMoviesSavedData(moviesSaved);
     // setMessageInputSearch("");
     // setToggleCheckbox({plaseSavedMovies: false});
-    // console.log("Привет !!!!!!!!!!!!!!!");
+
 
   }
 
-  // function inSavedMoviesSupport() {
-  //   setMoviesSavedData(moviesSaved);
-
-  // }
 
   function inMain() {
     navigate("/movies-explorer-frontend");
@@ -203,9 +201,11 @@ function App() {
     });
     setLoggedIn(false);
     navigate("/movies-explorer-frontend");
-    localStorage.removeItem("foundMovies");
-    localStorage.removeItem("toggleCheckbox");
-    localStorage.removeItem("search");
+    localStorage.clear();
+    // localStorage.removeItem("foundMovies");
+    // localStorage.removeItem("toggleCheckbox");
+    // localStorage.removeItem("search");
+    // localStorage.removeItem("beatfilmMoviesOllMuvies");
   };
 
   function handleUpdateUser({ name, email }) {
@@ -505,20 +505,22 @@ function App() {
             <Route
               path="/sign-in"
               element={
+                <ProtectedRouteLoginAndRegister path="/sign-in" loggedIn={loggedIn}>
                 <>
                   <Header type="auth" />
                   <Login
-                    // inProfile={inProfile}
                     hahdleSubmitLogin={hahdleSubmitLogin}
                     errorMessage={errorMessage}
                   ></Login>
                 </>
+                </ProtectedRouteLoginAndRegister>
               }
             />
 
             <Route
               path="/sign-up"
               element={
+                <ProtectedRouteLoginAndRegister path="/sign-up" loggedIn={loggedIn}>
                 <>
                   <Header
                     type="auth"
@@ -531,6 +533,7 @@ function App() {
                     hahdleSubmitRegister={hahdleSubmitRegister}
                   ></Register>
                 </>
+                </ProtectedRouteLoginAndRegister>
               }
             />
             <Route
