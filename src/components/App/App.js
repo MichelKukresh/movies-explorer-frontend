@@ -86,7 +86,7 @@ function App() {
   // нестандартное решение для страницы url saved-movies, но сокращает код, минуя все первоначальную обработку страницы url movies
   useEffect(() => {
     setMoviesSavedData(moviesSaved);
-  }, [moviesSaved]);
+  }, [moviesSaved, location.pathname]);
 
   useEffect(() => {
     api.getTwtForNewApi(localStorage.getItem("jwt"));
@@ -302,7 +302,6 @@ function App() {
           nameEN: newItem.data.nameEN,
           nameRU: newItem.data.nameRU,
           trailerLink: newItem.data.trailerLink,
-
           year: newItem.data.year,
         };
 
@@ -587,10 +586,7 @@ function App() {
                     ></Header>
                     <SavedMovies
                       setEditNavigationMenuOpen={setEditNavigationMenuOpen}
-
                       setEditUiMenu={setEditUiMenu}
-
-
                       inSavedMovies={inSavedMovies}
                       messageInputSearch={messageInputSearch}
                       toggleCheckbox={toggleCheckbox}
@@ -599,7 +595,6 @@ function App() {
                       messageForNotFound={messageForNotFound}
                       handleinitialMovies={handleinitialMoviesInSavedMovies}
                       dataButtonNext={dataButtonNext}
-                      //hahdleDeleteInSadedMovies={hahdleDeleteInSadedMovies}
                       hahdleDeleteAndAddSadedMovies={
                         hahdleDeleteAndAddSadedMovies
                       }
