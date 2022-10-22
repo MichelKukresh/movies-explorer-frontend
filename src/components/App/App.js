@@ -1,5 +1,11 @@
 import { useEffect, useState } from "react";
-import { Routes, Route, useNavigate, useParams, useLocation } from "react-router-dom";
+import {
+  Routes,
+  Route,
+  useNavigate,
+  useParams,
+  useLocation,
+} from "react-router-dom";
 import { getJWT, login, register } from "../../utils/Fetch";
 import { CurrentUserContext } from "../../contexts/CurrentUserContext";
 
@@ -41,8 +47,8 @@ function App() {
   const [isVisiblePreloader, setVisiblePreloader] = useState(false);
   const [messageForNotFound, setMessageForNotFound] = useState("");
   const [messageInputSearch, setMessageInputSearch] = useState(""); // для отображения сообщений в поле поиска "Фильмы"
-  const [messageAboutResultUpdateProfile, setMessageAboutResultUpdateProfile] = useState({err: false, messge: ""});
-
+  const [messageAboutResultUpdateProfile, setMessageAboutResultUpdateProfile] =
+    useState({ err: false, messge: "" });
 
   const [isVisibleErrorNotFound, setVisibleErrorNotFound] = useState(false);
 
@@ -78,9 +84,9 @@ function App() {
   }, []);
 
   // нестандартное решение для страницы url saved-movies, но сокращает код, минуя все первоначальную обработку страницы url movies
-  useEffect(()=> {
+  useEffect(() => {
     setMoviesSavedData(moviesSaved);
-  }, [moviesSaved])
+  }, [moviesSaved]);
 
   useEffect(() => {
     api.getTwtForNewApi(localStorage.getItem("jwt"));
@@ -90,48 +96,35 @@ function App() {
         api.getInitialUser().then((data) => {
           setCurrentUser(data);
         }),
-        api.getInitialMovies().then((data) =>  setMoviesSaved(data.data)),
-      ]).then(navigate(location.pathname))
-    //.then(console.log("2")) /// вместо
-      .catch((err) => {
-        setVisibleErrorNotFound(true);
-        console.log(err);
-      });
+        api.getInitialMovies().then((data) => setMoviesSaved(data.data)),
+      ])
+        .then(navigate(location.pathname))
+        .catch((err) => {
+          setVisibleErrorNotFound(true);
+          console.log(err);
+        });
     }
   }, [loggedIn]);
 
   const tokenCheck = () => {
     let jwt = localStorage.getItem("jwt");
     if (jwt) {
-      getJWT(jwt).then((data) => {
-        setLoggedIn(true);
-
-
-        //setMoviesSavedData(moviesSaved)
-
-
-        if(location.pathname === "/") {
+      getJWT(jwt)
+        .then((data) => {
+          setLoggedIn(true);
+          if (location.pathname === "/") {
+            navigate("/movies-explorer-frontend");
+          } else {
+            navigate(location.pathname);
+          }
+        })
+        .catch((err) => {
+          console.log(err);
           navigate("/movies-explorer-frontend");
-
-
-        } else {
-          navigate(location.pathname);
-        }
-
-       //navigate(location.pathname);
-      })
-      .catch((err) => {
-        console.log(err);
-        navigate("/movies-explorer-frontend");
-        // localStorage.removeItem("foundMovies");
-        // localStorage.removeItem("toggleCheckbox");
-        // localStorage.removeItem("search");
-        // localStorage.removeItem("jwt");
-        // localStorage.removeItem("beatfilmMoviesOllMuvies");
-        localStorage.clear();
-        //// добавить очистку списка фильмов с beatifui
-        setLoggedIn(false);
-      });
+          localStorage.clear();
+          setLoggedIn(false);
+          setChangeableArrayDependingScreenSize([]);
+        });
     } else {
       navigate(location.pathname);
     }
@@ -139,25 +132,14 @@ function App() {
 
   function inMovies() {
     navigate("/movies");
-    // setEditNavigationMenuOpen(false);
-    //changeableArray();
-    //setConfigSearchForm();
   }
 
   function inSavedMovies() {
     navigate("/saved-movies");
-    // setEditNavigationMenuOpen(false);
-    // //setMoviesSavedData(moviesSaved);
-    // setMessageInputSearch("");
-    // setToggleCheckbox({plaseSavedMovies: false});
-
-
   }
-
 
   function inMain() {
     navigate("/movies-explorer-frontend");
-    //setEditNavigationMenuOpen(false);
   }
 
   //принимаем данные из вормы регистрации
@@ -176,7 +158,6 @@ function App() {
   //обработка логина
   const hahdleSubmitLogin = (dataRegister) => {
     setErrorMesage("");
-
     login(dataRegister)
       .then((data) => {
         if (data.token) {
@@ -202,10 +183,7 @@ function App() {
     setLoggedIn(false);
     navigate("/movies-explorer-frontend");
     localStorage.clear();
-    // localStorage.removeItem("foundMovies");
-    // localStorage.removeItem("toggleCheckbox");
-    // localStorage.removeItem("search");
-    // localStorage.removeItem("beatfilmMoviesOllMuvies");
+    setChangeableArrayDependingScreenSize([]);
   };
 
   function handleUpdateUser({ name, email }) {
@@ -213,60 +191,59 @@ function App() {
       .patchUserInfoNameAbout(name, email)
       .then((data) => {
         setCurrentUser(data);
-        setMessageAboutResultUpdateProfile({err: true, messge: "Данные успешно сохранены"});
+        setMessageAboutResultUpdateProfile({
+          err: true,
+          messge: "Данные успешно сохранены",
+        });
       })
       .catch((err) => {
-        if(err === "Ошибка: 409") {
-          setMessageAboutResultUpdateProfile({err: false, messge: "Данные введены не корректно"});
+        if (err === "Ошибка: 409") {
+          setMessageAboutResultUpdateProfile({
+            err: false,
+            messge: "Данные введены не корректно",
+          });
         } else {
           setVisibleErrorNotFound(true);
         }
         console.log(err);
       });
-    // .finally(() => setButtonInfomationAboutSave("Сохранить"));
   }
-
-  // поиск среди фильмов по запросу со страницы movies
 
   function handleinitialMovies(search) {
     setMessageForNotFound("");
     setVisiblePreloader(true);
 
-
-
     //реализован модуль единичного запроса к серверу фильмов, повторно данные берутся в локал сторидже
-    const beatfilmMoviesOllMuvies = JSON.parse(localStorage.getItem("beatfilmMoviesOllMuvies"));
+    const beatfilmMoviesOllMuvies = JSON.parse(
+      localStorage.getItem("beatfilmMoviesOllMuvies")
+    );
 
     const result = new Promise((resolve, reject) => {
-      if(beatfilmMoviesOllMuvies) {
-        resolve( beatfilmMoviesOllMuvies);
+      if (beatfilmMoviesOllMuvies) {
+        resolve(beatfilmMoviesOllMuvies);
       } else {
-        moviesApi.getInitialMovies().then((data)=> {
+        moviesApi.getInitialMovies().then((data) => {
           localStorage.setItem("beatfilmMoviesOllMuvies", JSON.stringify(data));
           reject(data);
         });
       }
     });
 
-      result.then((data) => {
+    result
+      .then((data) => {
         const re = new RegExp(`${search}`, "i");
         const foundMoviesID = data
           .map((e) => String(Object.values(e)).match(re) != null && e)
           .filter((e) => e !== false);
-          console.log(toggleCheckbox.placeMovie);
+        console.log(toggleCheckbox.placeMovie);
 
         const folterShortMovie = !toggleCheckbox.placeMovie
           ? foundMoviesID
           : foundMoviesID.filter((e) => e.duration <= 40);
 
-        // setMoviesOllOnApi(foundMoviesID);
         const checkMessageForNotFound =
           foundMoviesID.length === 0 ? "Ничего не найдено" : "";
         setMessageForNotFound(checkMessageForNotFound);
-
-        // console.log(foundMoviesID);
-
-        // console.log(search);
 
         localStorage.setItem("foundMovies", JSON.stringify(folterShortMovie));
         localStorage.setItem("toggleCheckbox", toggleCheckbox.placeMovie);
@@ -353,7 +330,6 @@ function App() {
         setMoviesSaved((moviesSaved) =>
           moviesSaved.filter((c) => (c._id !== newItem.data._id ? c : null))
         );
-
         setMoviesSavedData((moviesSavedData) =>
           moviesSavedData.filter((c) => (c._id !== newItem.data._id ? c : null))
         );
@@ -365,7 +341,6 @@ function App() {
   }
 
   // принятие решения удалить или сохранить и сформировать объект
-
   function hahdleDeleteAndAddSadedMovies(data) {
     switch (data.typeEditUiMenu) {
       case "movies":
@@ -389,7 +364,6 @@ function App() {
             movieId: data.item.id,
           });
         }
-
         break;
       case "saved-movies":
         hahdleDeleteInSadedMovies(data.item._id);
@@ -421,21 +395,16 @@ function App() {
     const foundMoviesLocalStorage = JSON.parse(
       localStorage.getItem("foundMovies")
     );
-
     if (foundMoviesLocalStorage) {
       const changeableArrayFromRender = foundMoviesLocalStorage.slice(
         0,
         columnAndRow.card
       );
       setChangeableArrayDependingScreenSize(changeableArrayFromRender);
-
-
-
       const isVisibleNext =
         changeableArrayFromRender.length >= foundMoviesLocalStorage.length
           ? false
           : true;
-
       setDataButtonNext({ isVisible: isVisibleNext });
     }
   }
@@ -446,27 +415,18 @@ function App() {
       localStorage.getItem("toggleCheckbox")
     );
 
-    //const searchLocalStorage = localStorage.getItem("search");
-
     setToggleCheckbox({ placeMovie: toggleCheckboxLocalStorage });
-
-    //setMessageInputSearch(searchLocalStorage);
-
-    console.log("sdsdsd"); ///
   }
-
   function handleButtonNextMovies() {
     const foundMoviesLocalStorage = JSON.parse(
       localStorage.getItem("foundMovies")
     );
-
     setChangeableArrayDependingScreenSize(
       foundMoviesLocalStorage.slice(
         0,
         changeableArrayDependingScreenSize.length + columnAndRow.add
       )
     );
-
     const isVisibleNext =
       changeableArrayDependingScreenSize.length + columnAndRow.add >=
       foundMoviesLocalStorage.length
@@ -495,8 +455,7 @@ function App() {
                     setOpen={setEditNavigationMenuOpen}
                   />
                   <Main
-                  setEditNavigationMenuOpen={setEditNavigationMenuOpen}
-
+                    setEditNavigationMenuOpen={setEditNavigationMenuOpen}
                   ></Main>
                   <Footer></Footer>
                 </div>
@@ -505,14 +464,17 @@ function App() {
             <Route
               path="/sign-in"
               element={
-                <ProtectedRouteLoginAndRegister path="/sign-in" loggedIn={loggedIn}>
-                <>
-                  <Header type="auth" />
-                  <Login
-                    hahdleSubmitLogin={hahdleSubmitLogin}
-                    errorMessage={errorMessage}
-                  ></Login>
-                </>
+                <ProtectedRouteLoginAndRegister
+                  path="/sign-in"
+                  loggedIn={loggedIn}
+                >
+                  <>
+                    <Header type="auth" />
+                    <Login
+                      hahdleSubmitLogin={hahdleSubmitLogin}
+                      errorMessage={errorMessage}
+                    ></Login>
+                  </>
                 </ProtectedRouteLoginAndRegister>
               }
             />
@@ -520,19 +482,22 @@ function App() {
             <Route
               path="/sign-up"
               element={
-                <ProtectedRouteLoginAndRegister path="/sign-up" loggedIn={loggedIn}>
-                <>
-                  <Header
-                    type="auth"
-                    setOpenPopapRegistration={setOpenPopapRegistration}
-                  />
-                  <Register
-                    errorMessage={errorMessage}
-                    isOpenPopapRegistration={isOpenPopapRegistration}
-                    setOpenPopapRegistration={setOpenPopapRegistration}
-                    hahdleSubmitRegister={hahdleSubmitRegister}
-                  ></Register>
-                </>
+                <ProtectedRouteLoginAndRegister
+                  path="/sign-up"
+                  loggedIn={loggedIn}
+                >
+                  <>
+                    <Header
+                      type="auth"
+                      setOpenPopapRegistration={setOpenPopapRegistration}
+                    />
+                    <Register
+                      errorMessage={errorMessage}
+                      isOpenPopapRegistration={isOpenPopapRegistration}
+                      setOpenPopapRegistration={setOpenPopapRegistration}
+                      hahdleSubmitRegister={hahdleSubmitRegister}
+                    ></Register>
+                  </>
                 </ProtectedRouteLoginAndRegister>
               }
             />
@@ -551,10 +516,14 @@ function App() {
                       loggedIn={loggedIn}
                     ></Header>
                     <Profile
-                      messageAboutResultUpdateProfile={messageAboutResultUpdateProfile}
+                      messageAboutResultUpdateProfile={
+                        messageAboutResultUpdateProfile
+                      }
                       handleUpdateUser={handleUpdateUser}
                       handleLogaut={handleLogaut}
-                      setMessageAboutResultUpdateProfile={setMessageAboutResultUpdateProfile}
+                      setMessageAboutResultUpdateProfile={
+                        setMessageAboutResultUpdateProfile
+                      }
                     ></Profile>
                   </>
                 </ProtectedRoute>
@@ -575,12 +544,10 @@ function App() {
                       loggedIn={loggedIn}
                     ></Header>
                     <Movies
-                    setEditNavigationMenuOpen={setEditNavigationMenuOpen}
-                    changeableArray={changeableArray}
-                    setConfigSearchForm={setConfigSearchForm}
-                    setEditUiMenu={setEditUiMenu}
-
-
+                      setEditNavigationMenuOpen={setEditNavigationMenuOpen}
+                      changeableArray={changeableArray}
+                      setConfigSearchForm={setConfigSearchForm}
+                      setEditUiMenu={setEditUiMenu}
                       messageInputSearch={messageInputSearch}
                       toggleCheckbox={toggleCheckbox}
                       setToggleCheckbox={setToggleCheckbox}
@@ -619,17 +586,12 @@ function App() {
                       loggedIn={loggedIn}
                     ></Header>
                     <SavedMovies
-                    setEditNavigationMenuOpen={setEditNavigationMenuOpen}
-                    //setMoviesSavedData={setMoviesSavedData}
-                    //setMessageInputSearch={setMessageInputSearch}
-                    // setToggleCheckbox({plaseSavedMovies: false});
-                    setEditUiMenu={setEditUiMenu}
-                    //movies={moviesSaved} // нужно для первоначальной загрузки, ниже пропс с фильмами, но уже после поиска и т.д
+                      setEditNavigationMenuOpen={setEditNavigationMenuOpen}
+
+                      setEditUiMenu={setEditUiMenu}
 
 
-                    inSavedMovies={inSavedMovies}
-
-
+                      inSavedMovies={inSavedMovies}
                       messageInputSearch={messageInputSearch}
                       toggleCheckbox={toggleCheckbox}
                       setToggleCheckbox={setToggleCheckbox}
@@ -641,7 +603,6 @@ function App() {
                       hahdleDeleteAndAddSadedMovies={
                         hahdleDeleteAndAddSadedMovies
                       }
-
                       moviesSaved={moviesSavedData}
                       typeEditUiMenu={typeEditUiMenu}
                     ></SavedMovies>
@@ -651,16 +612,14 @@ function App() {
               }
             />
             <Route
-            path="*" element={
-            <ErrorNotFoun
-              setVisibleErrorNotFound={setVisibleErrorNotFound}
-              isVisibleErrorNotFound={isVisibleErrorNotFound}
-              badRoute={true}
-            ></ErrorNotFoun>}
-
-
-
-
+              path="*"
+              element={
+                <ErrorNotFoun
+                  setVisibleErrorNotFound={setVisibleErrorNotFound}
+                  isVisibleErrorNotFound={isVisibleErrorNotFound}
+                  badRoute={true}
+                ></ErrorNotFoun>
+              }
             />
           </Routes>
           <Menu

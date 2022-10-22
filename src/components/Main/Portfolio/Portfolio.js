@@ -53,7 +53,6 @@ function Portfolio() {
               target="blank"
               className="portfolio__link"
               href="https://kukreshma.students.nomoredomains.sbs"
-              //href="https://michelkukresh.github.io/mesto/index.html"
             >
               Одностраничное приложение
             <img alt="стрелка" src={arrow} />

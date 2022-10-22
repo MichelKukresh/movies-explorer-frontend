@@ -77,9 +77,6 @@ function Profile(props) {
           className="profile__input-type"
           placeholder={currentUser.name}
         ></input>
-        {/* <span className="profile__span-input profile__span-input_last">
-          {includNameAndMailToSpan.email}
-        </span> */}
         <span className="profile__span-input-validation">
           {form.errors.name}
         </span>
@@ -96,7 +93,6 @@ function Profile(props) {
         <span className="profile__span-input-validation profile__span-input-validation_long-margin">
           {form.errors.email}<span className={ props.messageAboutResultUpdateProfile.err ? "profile__span-input-validation_no-error" : ""}>{props.messageAboutResultUpdateProfile.messge}</span>
         </span>
-        {/* <span className="profile__span-input profile__span-input_validation">Валидация</span> */}
         {!isVisivleEdit && (
           <button
             type="button"

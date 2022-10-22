@@ -6,9 +6,6 @@ function ButtonSubmit(props) {
     props.onClick();
   }
 
-  //console.log(props);
-
-
   return (
     <button
       disabled={!props.isDisableStatus}

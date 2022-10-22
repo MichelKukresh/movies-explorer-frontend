@@ -1,27 +1,17 @@
-import { useEffect, useState } from "react";
-import ScreenSize from "../../../utils/hooksScreenSize";
 import MoviesCard from "../MoviesCard/MoviesCard";
 import Preloader from "../Preloader/Preloader";
 import "./MoviesCardList.css";
 
 function MoviesCardList(props) {
-
   const isTypeSavedMoviesSite = props.typeEditUiMenu === "saved-movies";
-  // const isTypeMoviesSite = props.typeEditUiMenu === "movies";
-
-
 
   const moviesArrForRender = isTypeSavedMoviesSite
     ? props.moviesSaved
     : props.movies;
 
-function handleButtonNext() {
-  props.handleButtonNextMovies();
- // console.log("пока не работае кнопка");
-  //console.log(props.dataButtonNext.isVisible);
-}
-
-//console.log(props.messageForNotFound)
+  function handleButtonNext() {
+    props.handleButtonNextMovies();
+  }
 
   return (
     <div className="moviesCardList">
@@ -42,9 +32,15 @@ function handleButtonNext() {
       )}
       {props.isVisiblePreloader && <Preloader></Preloader>}
       {props.messageForNotFound}
-        {props.dataButtonNext.isVisible && !isTypeSavedMoviesSite && <button onClick={()=> handleButtonNext()} type="button" className="moviesCardList__button-next">
+      {props.dataButtonNext.isVisible && !isTypeSavedMoviesSite && (
+        <button
+          onClick={() => handleButtonNext()}
+          type="button"
+          className="moviesCardList__button-next"
+        >
           Еще
-        </button>}
+        </button>
+      )}
     </div>
   );
 }

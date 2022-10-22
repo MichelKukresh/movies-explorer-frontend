@@ -5,9 +5,6 @@ import ButtonSubmit from "../../ButtonSubmit/ButtonSubmit";
 import { useEffect, useRef } from "react";
 
 function Register(props) {
-
-
-
   const form = useFormWithValidation();
   const refName = useRef(null);
   const refPassword = useRef(null);
@@ -19,14 +16,12 @@ function Register(props) {
     refPassword.current.value = "";
   }, [props.isOpenPopapRegistration]);
 
-
   function hahdleSubmitForm(e) {
     form.resetForm();
     submitRegister(e);
   }
 
   function submitRegister(e) {
-    // e.preventDefault();
     props.hahdleSubmitRegister({
       name: refName.current.value,
       email: refEmail.current.value,
@@ -40,7 +35,6 @@ function Register(props) {
         <h2 className="register__hello">Добро пожаловать!</h2>
       </div>
       <form className="register__form-container" autoComplete="off">
-
         <span className="register__span-input">Имя </span>
         <input
           ref={refName}

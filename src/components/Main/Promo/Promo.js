@@ -12,7 +12,6 @@ function Promo() {
           <span className="promo__span">
             Листайте ниже, чтобы узнать больше про этот проект и его создателя.
           </span>
-          {/* <button type="button" className="promo__button">Узнать больше</button> */}
         </div>
         <img className="promo__world" src={textWorld} alt="word" />
       </div>

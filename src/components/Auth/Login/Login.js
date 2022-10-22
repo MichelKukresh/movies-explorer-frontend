@@ -5,11 +5,6 @@ import ButtonSubmit from "../../ButtonSubmit/ButtonSubmit";
 import { useEffect, useRef } from "react";
 
 function Login(props) {
-  // function bittonLogin(e) {
-  //   e.preventDefault();
-  //   props.inProfile();
-  // }
-
   const form = useFormWithValidation();
   const refPassword = useRef(null);
   const refEmail = useRef(null);
@@ -19,25 +14,17 @@ function Login(props) {
     refPassword.current.value = "";
   }, [props.isOpenPopapRegistration]);
 
-
   function hahdleSubmitForm(e) {
     form.resetForm();
     submitLogin(e);
   }
 
   function submitLogin(e) {
-    // e.preventDefault();
     props.hahdleSubmitLogin({
       email: refEmail.current.value,
       password: refPassword.current.value,
     });
   }
-  //console.log(props.errorMessage);
-
-    //console.log(form.isVisibleSpanError);
-
-
-
 
   return (
     <div className="login">
@@ -48,22 +35,22 @@ function Login(props) {
         <span className="login__span-input">E-mail</span>
 
         <input
-        onChange={(e) => form.handleChange(e)}
-        name="email"
-        ref={refEmail}
+          onChange={(e) => form.handleChange(e)}
+          name="email"
+          ref={refEmail}
           type="email"
           className="login__input-type"
           placeholder="pochta@yandex.ru"
           required
         ></input>
         <span className="login__span-input login__span-input_validation">
-        {form.errors.email}
+          {form.errors.email}
         </span>
 
         <span className="login__span-input">Пароль</span>
         <input
-        onChange={(e) => form.handleChange(e)}
-        name="password"
+          onChange={(e) => form.handleChange(e)}
+          name="password"
           ref={refPassword}
           type="password"
           className="login__input-type"
@@ -71,7 +58,7 @@ function Login(props) {
           required
         ></input>
         <span className="login__span-input login__span-input_validation login__span-input_plase-on-button">
-        {form.errors.password}
+          {form.errors.password}
           {props.errorMessage &&
             !form.isVisibleSpanError &&
             "Что то пошло не так ..."}

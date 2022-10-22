@@ -50,11 +50,6 @@
     column-gap: 30px;
     margin-top: 131px;
   }
-
-  /* .moviesCardList__container {
-    grid-template-columns: repeat(auto-fit, 336px);
-    row-gap: 34px;
-  } */
 }
 
 @media (max-width: 500px) {

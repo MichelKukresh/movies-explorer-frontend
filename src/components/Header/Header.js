@@ -45,40 +45,61 @@ function Header(props) {
         <a className="header__logo-link" href="/movies-explorer-frontend">
           <img className="header__logo" src={logo} alt="логотип" />{" "}
         </a>
-        {!isAuth && props.loggedIn &&  (
+        {!isAuth && props.loggedIn && (
           <BurgerMenu setOpen={props.setOpen}></BurgerMenu>
         )}
         {(isProfile || props.loggedIn) && (
           <div className="header__container-profile">
             <div className="header__container-profile-link">
               <button
-              type="button"
-              onClick={(e) => handlButtonGetMovies(e)}
-              className={`header__link ${ (props.typeEditUiMenu === "movies") && "header__link_activ" } ${(props.type === "landing") && "header__link_landing"}`}
+                type="button"
+                onClick={(e) => handlButtonGetMovies(e)}
+                className={`header__link ${
+                  props.typeEditUiMenu === "movies" && "header__link_activ"
+                } ${props.type === "landing" && "header__link_landing"}`}
               >
                 Фильмы
               </button>
-              <button type="button" onClick={(e) => handlButtonGetSaveMovies(e)}
-              className={`header__link ${ (props.typeEditUiMenu === "saved-movies") && "header__link_activ" } ${(props.type === "landing") && "header__link_landing"}`}>
+              <button
+                type="button"
+                onClick={(e) => handlButtonGetSaveMovies(e)}
+                className={`header__link ${
+                  props.typeEditUiMenu === "saved-movies" &&
+                  "header__link_activ"
+                } ${props.type === "landing" && "header__link_landing"}`}
+              >
                 Сохраненные фильмы
               </button>
             </div>
-            <button onClick={()=> handlButtonAkkaunt()} type="button" className={`header__buttom-akkaunt ${(props.type === "landing") && "header__buttom-akkaunt_landing"}`}>
+            <button
+              onClick={() => handlButtonAkkaunt()}
+              type="button"
+              className={`header__buttom-akkaunt ${
+                props.type === "landing" && "header__buttom-akkaunt_landing"
+              }`}
+            >
               <img src={icon} alt="иконка аккаунта" />{" "}
               <span className="header__buttom-akkaunt-title">Аккаунт</span>
             </button>
           </div>
         )}
-        {(isLandibg && !props.loggedIn ) && (
+        {isLandibg && !props.loggedIn && (
           <div className="header__login">
-            <button type="button" className="header__signup" onClick={(e)=>handlButtonSignUp(e)}>Регистрация</button>
-            {/* <Link to="/sign-up" className="header__signup" src="">
+            <button
+              type="button"
+              className="header__signup"
+              onClick={(e) => handlButtonSignUp(e)}
+            >
               Регистрация
-            </Link> */}
-            <button type="button" className="header__signin" onClick={handlButtonSignIn}><span>Войти</span></button>
-            {/* <Link to="/sign-in" className="header__signin">
+            </button>
+
+            <button
+              type="button"
+              className="header__signin"
+              onClick={handlButtonSignIn}
+            >
               <span>Войти</span>
-            </Link> */}
+            </button>
           </div>
         )}
       </div>
