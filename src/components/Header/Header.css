@@ -51,6 +51,10 @@
   background-color: #fafafa;
 }
 
+.header__link_landing {
+  background-color: #dddee3;
+}
+
 .header__link_activ {
   font-weight: 500;
 }
@@ -131,6 +135,10 @@
   margin-bottom: auto;
 }
 
+.header__buttom-akkaunt_landing {
+  background-color: #dddee3;
+}
+
 .header__buttom-akkaunt:hover {
   opacity: 0.8;
 }
@@ -145,7 +153,7 @@
   margin-right: 5px;
 }
 
-@media (max-width: 800px) {
+@media (max-width: 768px) {
   .header__menu-logo {
     padding: 18px 19px 18px 19px;
   }

@@ -1,8 +1,8 @@
 .buttonSubmit {
-  background: #3456f3;
+  background: #F8F8F8;
   border-radius: 3px;
   width: 100%;
-  color: #ffffff;
+  color: #C2C2C2;
   font-family: "Inter";
   font-style: normal;
   font-weight: 500;
@@ -14,4 +14,9 @@
 
 .buttonSubmit:hover {
   opacity: 0.8;
+}
+
+.buttonSubmit_activ {
+  background: #3456f3;
+  color: #ffffff;
 }

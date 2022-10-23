@@ -41,6 +41,11 @@
 .login__span-input_validation {
   color: #ee3465;
   margin-top: 8px;
+  min-height: 12px;
+}
+
+.login__span-input_plase-on-button {
+  margin-bottom: 221px;
 }
 
 .login__submit-button {

@@ -41,6 +41,11 @@
 .register__span-input_validation {
   color: #ee3465;
   margin-top: 8px;
+  min-height: 12px;
+}
+
+.register__span-input_plase-on-button {
+  margin-bottom: 126px;
 }
 
 .register__submit-button {
@@ -74,6 +79,16 @@
   line-height: 17px;
   width: 100%;
 }
+
+.register__input-type:focus-visible {
+  outline: none;
+  border-bottom: solid 1px #3456f3;
+
+}
+
+/* .register__input-type:-webkit-autofill {
+  transition: all 5000s ease-in-out;
+} */
 
 .register__is-register {
   font-weight: 400;

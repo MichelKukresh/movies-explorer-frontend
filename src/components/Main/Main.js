@@ -3,8 +3,15 @@ import Promo from "./Promo/Promo";
 import "./Main.css";
 import Techs from "./Techs/Techs";
 import Portfolio from "./Portfolio/Portfolio";
+import { useEffect } from "react";
 
-function Main() {
+function Main(props) {
+
+  useEffect(()=> {
+    props.setEditNavigationMenuOpen(false);
+  }, [])
+
+
   return(
     <main className="main">
       <Promo></Promo>
