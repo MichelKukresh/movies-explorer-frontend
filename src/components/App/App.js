@@ -557,10 +557,8 @@ function App() {
                       isVisiblePreloader={isVisiblePreloader}
                       movies={changeableArrayDependingScreenSize}
                       handleinitialMovies={handleinitialMovies}
-                      //hahdleAddInSadedMovies={hahdleAddInSadedMovies}
                       moviesSaved={moviesSaved}
                       typeEditUiMenu={typeEditUiMenu}
-                      //hahdleDeleteInSadedMovies={hahdleDeleteInSadedMovies}
                       hahdleDeleteAndAddSadedMovies={
                         hahdleDeleteAndAddSadedMovies
                       }
@@ -609,11 +607,16 @@ function App() {
             <Route
               path="*"
               element={
-                <ErrorNotFoun
-                  setVisibleErrorNotFound={setVisibleErrorNotFound}
-                  isVisibleErrorNotFound={isVisibleErrorNotFound}
-                  badRoute={true}
-                ></ErrorNotFoun>
+                <ProtectedRoute
+                  path="*"
+                  loggedIn={loggedIn}
+                >
+                  <ErrorNotFoun
+                    setVisibleErrorNotFound={setVisibleErrorNotFound}
+                    isVisibleErrorNotFound={isVisibleErrorNotFound}
+                    badRoute={true}
+                  ></ErrorNotFoun>
+                </ProtectedRoute>
               }
             />
           </Routes>
